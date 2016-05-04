@@ -538,6 +538,9 @@
 
 					$(this).closest(".jstree-grid-wrapper").find(".jstree").trigger("resize_column.jstree-grid",[colNum,newPrevColWidth]);
 				})
+				.on("click", ".jstree-grid-separator", function (e) {
+					e.stopPropagation();
+				})
 				.on("click", ".jstree-grid-header-cell", function (e) {
 					if (!_this.sort) {
 						return;
