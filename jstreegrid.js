@@ -829,7 +829,9 @@
 					// get the title
 					title = col.title && objData.data !== null && objData.data !== undefined ? objData.data[col.title] || "" : "";
 					// strip out HTML
-					title = title.replace(htmlstripre, '');
+					if (typeof title === 'string') {
+						title = title.replace(htmlstripre, '');
+					}
 					
 					// get the width
 					paddingleft = 7;
