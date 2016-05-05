@@ -232,6 +232,24 @@
 					return bigger ? 1 : -1;
 				};
 				
+				// sortable columns when jQuery UI is available
+				if ($.ui && $.ui.sortable) {
+					var from, to;
+					
+					$(this.midWrapper).sortable({
+						axis: "x",
+						handle: ".jstree-grid-header",
+						cancel: ".jstree-grid-separator",
+						start: function (event, ui) {
+							from = ui.item.index();
+						},
+						stop: function (event, ui) {
+							to = ui.item.index();
+							gs.columns.splice(to, 0, gs.columns.splice(from, 1)[0]);
+						}
+					});
+				}
+				
 				this._initialized = true;
 			}
 		};
@@ -774,9 +792,6 @@
 				renderATitle(a,t,_this);
 				last = a;
 				for (i=0;i<cols.length;i++) {
-					if (this.treecol === i) {
-						continue;
-					}
 					col = cols[i];
 					dataCell = mw.children("div:eq("+i+")");
 					// get the cellClass, the wideCellClass, and the columnClass
