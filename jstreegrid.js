@@ -433,9 +433,8 @@
 				if (width !== 'auto' && typeof(width) !== "string") {
 					width -= borPadWidth;
 				}
-				margin = i === 0 ? 3 : 0;
 				col = this.midWrapper.children("div.jstree-grid-column-"+i);
-				last = $("<div></div>").css(conf).css({"margin-left": margin}).addClass("jstree-grid-div-"+this.uniq+"-"+i+" "+(tr?"ui-widget-header ":"")+" jstree-grid-header jstree-grid-header-cell jstree-grid-header-"+classAdd+" "+cl+" "+ccl).html(val);
+				last = $("<div></div>").css(conf).addClass("jstree-grid-div-"+this.uniq+"-"+i+" "+(tr?"ui-widget-header ":"")+" jstree-grid-header jstree-grid-header-cell jstree-grid-header-"+classAdd+" "+cl+" "+ccl).html(val);
 				last.addClass((tr?"ui-widget-header ":"")+"jstree-grid-header jstree-grid-header-"+classAdd);
 				last.prependTo(col);
 				last.attr(COL_DATA_ATTR, name);
