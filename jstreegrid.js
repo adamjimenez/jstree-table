@@ -163,7 +163,6 @@
 				}
 				// set a unique ID for this table
 				this.uniq = Math.ceil(Math.random()*1000);
-				this.treecol = treecol;
 				this.rootid = container.attr("id");
 			
 				var msie = /msie/.test(navigator.userAgent.toLowerCase());
@@ -791,7 +790,21 @@
 				//renderAWidth(a,_this);
 				renderATitle(a,t,_this);
 				last = a;
+				// find which column our tree shuld go in
+				var s = this.settings.grid;
+				var treecol = 0;
+				for (i=0;i<s.columns.length;i++) {
+					if (s.columns[i].tree) {
+						// save which column it was
+						treecol = i;
+						// do not check any others
+						break;
+					}
+				}
 				for (i=0;i<cols.length;i++) {
+					if (treecol === i) {
+						continue;
+					}
 					col = cols[i];
 					dataCell = mw.children("div:eq("+i+")");
 					// get the cellClass, the wideCellClass, and the columnClass
