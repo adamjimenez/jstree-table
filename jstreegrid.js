@@ -150,7 +150,9 @@
 					stateful: s.stateful,
 					indent: 0,
 					sortOrder: 'text',
-					sortAsc: true
+					sortAsc: true,
+					width: s.width,
+					height: s.height
 				}, cols = gs.columns, treecol = 0;
 				// find which column our tree shuld go in
 				for (i=0;i<s.columns.length;i++) {
@@ -184,12 +186,12 @@
 						'.jstree-grid-separator {position:absolute; top:0; right:0; height:24px; margin-left: -2px; border-width: 0 2px 0 0; *display:inline; *+display:inline; margin-right:0px;width:0px;}',
 						'.jstree-grid-header-cell {overflow: hidden; white-space: nowrap;padding: 1px 3px 2px 5px;}',
 						'.jstree-grid-header-themeroller {border: 0; padding: 1px 3px;}',
-						'.jstree-grid-header-regular {position:relative; background-color: #EBF3FD;}',
+						'.jstree-grid-header-regular {position:relative; background-color: #EBF3FD; z-index: 1;}',
 						'.jstree-grid-resizable-separator {cursor: col-resize; width: 2px;}',
 						'.jstree-grid-separator-regular {border-color: #d0d0d0; border-style: solid;}',
 						'.jstree-grid-cell-themeroller {border: none !important; background: transparent !important;}',
-						'.jstree-grid-wrapper {display: table; table-layout: fixed; width: 100%; overflow-x: auto;}',
-						'.jstree-grid-midwrapper {display: table-row; overflow: visible;}',
+						'.jstree-grid-wrapper {/*display: table;*/ table-layout: fixed; width: 100%; overflow: auto; position: relative;}',
+						'.jstree-grid-midwrapper {display: table-row;}',
 						'.jstree-grid-width-auto {width:auto;display:block;}',
 						'.jstree-grid-column {display: table-cell; overflow: hidden;}',
 						'.jstree-grid-col-0 {width: 100%;}'
@@ -203,6 +205,9 @@
 				if (s.width) {
 					this.gridWrapper.width(s.width);
 				}
+				if (s.height) {
+					this.gridWrapper.height(s.height);
+				}
 				// create the data columns
 				for (i=0;i<cols.length;i++) {
 					// create the column
@@ -210,6 +215,11 @@
 				}
 				this.midWrapper.children("div:eq("+treecol+")").append(container);
 				container.addClass("jstree-grid-cell");
+				
+				//move header with scroll
+				this.gridWrapper.scroll(function() {
+					$(this).find('.jstree-grid-header').css('top', $(this).scrollTop());
+				});
 
 				// copy original sort function
 				var defaultSort = $.proxy(this.settings.sort, this);
