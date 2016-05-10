@@ -74,7 +74,7 @@ We use the div to control the entire height and width, and the span to get acces
 	* `columnClass`: a CSS class to add to the header cell and the column cell
 	* `cellClass`: a CSS class to add to each cell in this column (except for the header) - added to the <span>
 	* `wideCellClass`: a CSS class to add to each cell in this column (except for the header) - added to the <div>
-	* `value`: the attribute on the node to use as the value for this cell - entered as the <span> text. Must be a string.
+	* `value`: the attribute on the node to use as the value for this cell - entered as the <span> text. Must be a string, number, boolean or other primitive.
 	* `format`: a function to modify the displayed value e.g. date formatting.
 	* `valueClass`: the attribute on the node to use as a class on this cell - added to the <span>
 	* `valueClassPrefix`: a prefix to add to the valueClass to use as a class on this cell
