@@ -187,7 +187,7 @@
 						'.jstree-grid-resizable-separator {cursor: col-resize; width: 2px;}',
 						'.jstree-grid-separator-regular {border-color: #d0d0d0; border-style: solid;}',
 						'.jstree-grid-cell-themeroller {border: none !important; background: transparent !important;}',
-						'.jstree-grid-wrapper {display: table; table-layout: fixed; width: 100%; overflow-x: auto;}',
+						'.jstree-grid-wrapper {/*display: table;*/ table-layout: fixed; width: 100%; overflow-x: auto;}',
 						'.jstree-grid-midwrapper {display: table-row; overflow: visible;}',
 						'.jstree-grid-width-auto {width:auto;display:block;}',
 						'.jstree-grid-column {display: table-cell; overflow: hidden;}',
