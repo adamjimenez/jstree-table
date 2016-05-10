@@ -147,6 +147,7 @@
 					isThemeroller : !!this._data.themeroller,
 					treeWidthDiff : 0,
 					resizable : s.resizable,
+					draggable : s.draggable,
 					stateful: s.stateful,
 					indent: 0,
 					sortOrder: 'text',
@@ -232,21 +233,25 @@
 				};
 				
 				// sortable columns when jQuery UI is available
-				if ($.ui && $.ui.sortable) {
-					var from, to;
-					
-					$(this.midWrapper).sortable({
-						axis: "x",
-						handle: ".jstree-grid-header",
-						cancel: ".jstree-grid-separator",
-						start: function (event, ui) {
-							from = ui.item.index();
-						},
-						stop: function (event, ui) {
-							to = ui.item.index();
-							gs.columns.splice(to, 0, gs.columns.splice(from, 1)[0]);
-						}
-					});
+				if (gs.draggable) {
+					if (!$.ui || !$.ui.sortable) {
+						console.warn('[jstree-grid] draggable option requires jQuery UI');
+					} else {
+						var from, to;
+						
+						$(this.midWrapper).sortable({
+							axis: "x",
+							handle: ".jstree-grid-header",
+							cancel: ".jstree-grid-separator",
+							start: function (event, ui) {
+								from = ui.item.index();
+							},
+							stop: function (event, ui) {
+								to = ui.item.index();
+								gs.columns.splice(to, 0, gs.columns.splice(from, 1)[0]);
+							}
+						});
+					}
 				}
 				
 				this._initialized = true;
