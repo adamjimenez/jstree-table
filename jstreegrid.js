@@ -151,6 +151,7 @@
 					indent: 0,
 					sortOrder: 'text',
 					sortAsc: true,
+					fixedHeader: s.fixedHeader || true,
 					width: s.width,
 					height: s.height
 				}, cols = gs.columns, treecol = 0;
@@ -217,9 +218,11 @@
 				container.addClass("jstree-grid-cell");
 				
 				//move header with scroll
-				this.gridWrapper.scroll(function() {
-					$(this).find('.jstree-grid-header').css('top', $(this).scrollTop());
-				});
+				if (gs.fixedHeader) {
+					this.gridWrapper.scroll(function() {
+						$(this).find('.jstree-grid-header').css('top', $(this).scrollTop());
+					});
+				}
 
 				// copy original sort function
 				var defaultSort = $.proxy(this.settings.sort, this);
