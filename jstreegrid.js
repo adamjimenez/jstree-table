@@ -565,6 +565,10 @@
 						gs.sortAsc = true;
 						symbol = "&uarr;";
 					}
+					
+					// highlight header cell
+					$(this.closest('.jstree-grid-wrapper')).find(".jstree-clicked").removeClass("jstree-clicked");
+					$(this).addClass("jstree-clicked");
 
 					// add sort arrow
 					$(this.closest('.jstree-grid-wrapper')).find(".jstree-grid-sort-icon").remove();
