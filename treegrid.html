@@ -15,11 +15,11 @@
 				
 				data = [{
 					text: "Root 1",
-					data: {price: "$5.00", size: "4",spanclass:"root"},
+					data: {price: 5, size: 4,spanclass:"root"},
 					children: [
-						{text: "Really long named child whose name gets cut off", data: {price: "$4.00", size: "3",spanclass:"first"}},
-						{text: "Child 2", data: {price: "$8.00", size: "2",spanclass:"second"}, children:[
-							{text:"Grandchild",data:{price: "EXPENSIVE!",size:"10",spanclass:"third"}}
+						{text: "Really long named child whose name gets cut off", data: {price: 4, size: "3",spanclass:"first"}},
+						{text: "Child 2", data: {price: 8, size: 2,spanclass:"second"}, children:[
+							{text:"Grandchild",data:{price: 100,size:10,spanclass:"third"}}
 						]}
 					]
 				}];
@@ -57,11 +57,11 @@
 						drag_finish : function () { 
 						}, 
 						drag_check : function (data) { 
-						return { 
-							after : true, 
-							before : true, 
-							inside : true 
-						}; 
+							return {
+								after : true, 
+								before : true, 
+								inside : true 
+							};
 						} 
 					}
 				})
@@ -168,27 +168,23 @@
 					grid: {
 						columns: [
 							{width: 110, header: "Nodes",title:"_DATA_"},
-							{cellClass: "col1", value: function (node) {
-								return(node.data ? node.data.price : "");
-							}, width: 60, header: "Price", title:"price"},
-							{cellClass: "col2", value: function (node) {
-								return(node.data ? node.data.size : "")
-							}, width: 60, header: "Qty", title:"size"}
+							{cellClass: "col1", value: "price", format: function(v){return "$"+v.toFixed(2);}, width: 60, header: "Price", title:"price"},
+							{cellClass: "col2", value: "size", width: 60, header: "Qty", title:"size"}
 						],
 						resizable:true
 					},
 					dnd: {
-            drop_finish : function () { 
-            }, 
-            drag_finish : function () { 
-            }, 
-            drag_check : function (data) { 
-                return { 
-                    after : true, 
-                    before : true, 
-                    inside : true 
-                }; 
-            } 
+						drop_finish : function () { 
+						}, 
+						drag_finish : function () { 
+						}, 
+						drag_check : function (data) { 
+							return { 
+								after : true, 
+								before : true, 
+								inside : true 
+							}; 
+						} 
 					}
 				});
 				$("div#jstree5div").jstree({
@@ -206,17 +202,17 @@
 						contextmenu:true
 					},
 					dnd: {
-            drop_finish : function () { 
-            }, 
-            drag_finish : function () { 
-            }, 
-            drag_check : function (data) { 
-                return { 
-                    after : true, 
-                    before : true, 
-                    inside : true 
-                }; 
-            } 
+						drop_finish : function () { 
+						}, 
+						drag_finish : function () { 
+						}, 
+						drag_check : function (data) { 
+							return { 
+								after : true, 
+								before : true, 
+								inside : true 
+							}; 
+						} 
 					}
 				});
 			});
@@ -233,8 +229,8 @@
 		<ul>
 			<li>The first tree has resizable and draggable columns set to true, as well as contextmenu enabled.</li>
 			<li>The second tree has a max-height set to 30px, causing the tree itself - but not the headers - to scroll.</li>
-			<li>The third tree uses an alternate them and styling.</li>
-			<li>The fourth tree uses a function for the <i>value</i>.</li>
+			<li>The third tree uses an alternate theme and styling.</li>
+			<li>The fourth tree uses a <i>format</i> function.</li>
 			<li>The fifth tree has 3 columns, but puts the tree in a different column.</li>
 		</ul>
 		<div id="jstree1">

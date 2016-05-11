@@ -83,7 +83,8 @@ We use the div to control the entire height and width, and the span to get acces
 	* `columnClass`: a CSS class to add to the header cell and the column cell
 	* `cellClass`: a CSS class to add to each cell in this column (except for the header) - added to the <span>
 	* `wideCellClass`: a CSS class to add to each cell in this column (except for the header) - added to the <div>
-	* `value`: the attribute on the node to use as the value for this cell - entered as the <span> text. Can be a string or a function.
+	* `value`: the attribute on the node to use as the value for this cell - entered as the <span> text. Must be a string, number, boolean or other primitive.
+	* `format`: a function to modify the displayed value e.g. date formatting.
 	* `valueClass`: the attribute on the node to use as a class on this cell - added to the <span>
 	* `valueClassPrefix`: a prefix to add to the valueClass to use as a class on this cell
 	* `wideValueClass`: the attribute on the node to use as a class on this cell - added to the <div>
@@ -106,11 +107,11 @@ Value is one of:
 Thus, if you have a node whose data is given by:
 
 ````JavaScript
-{text: "My Node", data: {price: "$10"}}
+{text: "My Node", data: {price: 10}}
 ````
 
 
-and we want the price value ($10) to be in column 1, then we have a config of:
+and we want the price value (10) to be in column 1, then we have a config of:
 
 ````JavaScript
 grid: {
@@ -121,24 +122,13 @@ grid: {
 }
 ````
 
-Or, in a function:
+Using the format option allows you to change the displayed value ($10):
 
 ````JavaScript
 grid: {
 	columns: [
 		{width: 50, header: "Nodes"},
-		{width: 30, header: "Price", value: function(node){return(node.data.price);}}
-	]
-}
-````
-
-Using a function allows you to calculate things, or make conditions:
-
-````JavaScript
-grid: {
-	columns: [
-		{width: 50, header: "Nodes"},
-		{width: 30, header: "Price", value: function(node){return("$"+(node.data.price*2));}}
+		{width: 30, header: "Price", value: 'price', format: function(v){return("$"+(v));}}
 	]
 }
 ````
