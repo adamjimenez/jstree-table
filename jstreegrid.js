@@ -213,6 +213,10 @@
 				for (i=0;i<cols.length;i++) {
 					// create the column
 					$("<div></div>").addClass("jstree-default jstree-grid-column jstree-grid-column-"+i+" jstree-grid-column-root-"+this.rootid).appendTo(this.midWrapper);
+					
+					if (typeof(cols[i].value) === "function") {
+						console.warn("[jstree-grid] using value as a function is deprecated, use 'format' option instead.");
+					}
 				}
 				this.midWrapper.children("div:eq("+treecol+")").append(container);
 				container.addClass("jstree-grid-cell");
@@ -878,7 +882,9 @@
 					// get the title
 					title = col.title && objData.data !== null && objData.data !== undefined ? objData.data[col.title] || "" : "";
 					// strip out HTML
-					title = title.replace(htmlstripre, '');
+					if (typeof title === 'string') {
+						title = title.replace(htmlstripre, '');
+					}
 					
 					// get the width
 					paddingleft = 7;
