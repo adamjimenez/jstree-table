@@ -202,7 +202,7 @@
 						'.jstree-grid-width-auto {width:auto;display:block;}',
 						'.jstree-grid-column {display: table-cell; overflow: hidden;}',
 						'.jstree-grid-col-0 {width: 100%;}',
-						'.jstree-grid-sort-icon {font-size: 8px; position: absolute; top:0; left: calc(50% - 8px);}',
+						'.jstree-grid-sort-icon {font-size: 8px; position: absolute; top:0; left: calc(50% - 4px);}',
 						'.vakata-context {z-index:2;}'
 					];
 
