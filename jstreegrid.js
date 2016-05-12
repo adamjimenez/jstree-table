@@ -204,7 +204,7 @@
 						'.jstree-grid-col-0 {width: 100%;}',
 						'.jstree-grid-sort-icon {font-size: 8px; position: absolute; top:0; left: calc(50% - 4px);}',
 						'.jstree-grid-midwrapper a.jstree-clicked, .jstree-grid-midwrapper a.jstree-hovered{background: transparent; border-color: transparent;}',
-						'.jstree-grid-midwrapper a.jstree-clicked:before, .jstree-grid-midwrapper a.jstree-hovered:before {position: absolute; left: 0; content:""; width: 100%; height: 24px; z-index: -1;}',
+						'.jstree-grid-midwrapper a.jstree-clicked:before, .jstree-grid-midwrapper a.jstree-hovered:before {position: absolute; left: 0; content:""; width: 100%; height: inherit; z-index: -1;}',
 						'.jstree-grid-midwrapper a.jstree-hovered:before {background: #e7f4f9;}',
 						'.jstree-grid-midwrapper a.jstree-clicked:before {background: #beebff;}',
 						'.vakata-context {z-index:2;}'
