@@ -157,6 +157,8 @@
 					fixedHeader: s.fixedHeader || true,
 					headerContextMenu: s.headerContextMenu || true,
 					checkIcon: 'fa fa-check',
+					arrowDownIcon: 'fa fa-chevron-down',
+					arrowUpIcon: 'fa fa-chevron-up',
 					width: s.width,
 					height: s.height
 				}, cols = gs.columns, treecol = 0;
@@ -189,7 +191,7 @@
 						'.jstree-grid-cell {vertical-align: top; overflow:hidden;margin-left:0;position:relative;width: 100%;padding-left:7px;white-space: nowrap;}',
 						'.jstree-grid-cell span {margin-right:0px;margin-right:0px;*display:inline;*+display:inline;white-space: nowrap;}',
 						'.jstree-grid-separator {position:absolute; top:0; right:0; height:24px; margin-left: -2px; border-width: 0 2px 0 0; *display:inline; *+display:inline; margin-right:0px;width:0px;}',
-						'.jstree-grid-header-cell {overflow: hidden; white-space: nowrap;padding: 1px 3px 2px 5px; cursor: default;}',
+						'.jstree-grid-header-cell {overflow: hidden; white-space: nowrap;padding: 4px 3px 2px 5px; cursor: default;}',
 						'.jstree-grid-header-themeroller {border: 0; padding: 1px 3px;}',
 						'.jstree-grid-header-regular {position:relative; background-color: #CBF3FD; z-index: 1;}',
 						'.jstree-grid-resizable-separator {cursor: col-resize; width: 2px;}',
@@ -200,6 +202,7 @@
 						'.jstree-grid-width-auto {width:auto;display:block;}',
 						'.jstree-grid-column {display: table-cell; overflow: hidden;}',
 						'.jstree-grid-col-0 {width: 100%;}',
+						'.jstree-grid-sort-icon {font-size: 8px; position: absolute; top:0; left: calc(50% - 8px);}',
 						'.vakata-context {z-index:2;}'
 					];
 
@@ -576,14 +579,14 @@
 				if (!name) { return; }
 			
 				// sort order
-				var symbol;
+				var arrowClass;
 				if (gs.sortOrder === name && gs.sortAsc === true) {
 					gs.sortAsc = false;
-					symbol = "&darr;";
+					arrowClass = gs.arrowDownIcon;
 				} else {
 					gs.sortOrder = name;
 					gs.sortAsc = true;
-					symbol = "&uarr;";
+					arrowClass = gs.arrowUpIcon;
 				}
 				
 				// highlight header cell
@@ -592,7 +595,7 @@
 			
 				// add sort arrow
 				$(this.closest('.jstree-grid-wrapper')).find(".jstree-grid-sort-icon").remove();
-				$("<span></span>").addClass("jstree-grid-sort-icon").appendTo($(this)).html(symbol);
+				$("<span></span>").addClass("jstree-grid-sort-icon").appendTo($(this)).addClass(arrowClass);
 			
 				// sort by column
 				var rootNode = _this.get_node('#');
