@@ -187,7 +187,7 @@
 						'.jstree-grid-separator {position:absolute; top:0; right:0; height:24px; margin-left: -2px; border-width: 0 2px 0 0; *display:inline; *+display:inline; margin-right:0px;width:0px;}',
 						'.jstree-grid-header-cell {overflow: hidden; white-space: nowrap;padding: 1px 3px 2px 5px; cursor: default;}',
 						'.jstree-grid-header-themeroller {border: 0; padding: 1px 3px;}',
-						'.jstree-grid-header-regular {position:relative; background-color: #EBF3FD; z-index: 1;}',
+						'.jstree-grid-header-regular {position:relative; background-color: #CBF3FD; z-index: 1;}',
 						'.jstree-grid-resizable-separator {cursor: col-resize; width: 2px;}',
 						'.jstree-grid-separator-regular {border-color: #d0d0d0; border-style: solid;}',
 						'.jstree-grid-cell-themeroller {border: none !important; background: transparent !important;}',
@@ -463,9 +463,15 @@
 				last = $("<div></div>").css(conf).addClass("jstree-grid-div-"+this.uniq+"-"+i+" "+(tr?"ui-widget-header ":"")+" jstree-grid-header jstree-grid-header-cell jstree-grid-header-"+classAdd+" "+cl+" "+ccl).html(val);
 				last.addClass((tr?"ui-widget-header ":"")+"jstree-grid-header jstree-grid-header-"+classAdd);
 				last.prependTo(col);
+
 				if (name) {
 					last.attr(COL_DATA_ATTR, name);
 				}
+				last.hover(function () {
+					$(this).addClass("jstree-hovered jstree-grid-header-hovered");
+				}, function () {
+					$(this).removeClass("jstree-hovered jstree-grid-header-hovered");
+				});
 				totalWidth += last.outerWidth();
 				puller = $("<div class='jstree-grid-separator jstree-grid-separator-"+classAdd+(tr ? " ui-widget-header" : "")+(resizable? " jstree-grid-resizable-separator":"")+"'>&nbsp;</div>").appendTo(last);
 				col.width(width);
@@ -598,6 +604,10 @@
 					gs.sortAsc = true;
 					symbol = "&uarr;";
 				}
+				
+				// highlight header cell
+				$(this.closest('.jstree-grid-wrapper')).find(".jstree-clicked").removeClass("jstree-clicked");
+				$(this).addClass("jstree-clicked");
 			
 				// add sort arrow
 				$(this.closest('.jstree-grid-wrapper')).find(".jstree-grid-sort-icon").remove();
