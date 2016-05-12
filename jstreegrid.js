@@ -202,7 +202,7 @@
 						'.jstree-grid-width-auto {width:auto;display:block;}',
 						'.jstree-grid-column {display: table-cell; overflow: hidden;}',
 						'.jstree-grid-col-0 {width: 100%;}',
-						'.jstree-grid-sort-icon {font-size: 8px; position: absolute; top:0; left: calc(50% - 8px);}',
+						'.jstree-grid-sort-icon {font-size: 8px; position: absolute; top:0; left: calc(50% - 4px);}',
 						'.vakata-context {z-index:2;}'
 					];
 
@@ -466,11 +466,6 @@
 				else
 					width = cols[i].width || defaultWidth;
 
-				// we only deal with borders if width is not auto and not percentages
-				borPadWidth = tr ? 1+6 : 2+8; // account for the borders and padding
-				if (width !== 'auto' && typeof(width) !== "string") {
-					width -= borPadWidth;
-				}
 				col = this.midWrapper.children("div.jstree-grid-column-"+i);
 				last = $("<div></div>").css(conf).addClass("jstree-grid-div-"+this.uniq+"-"+i+" "+(tr?"ui-widget-header ":"")+" jstree-grid-header jstree-grid-header-cell jstree-grid-header-"+classAdd+" "+cl+" "+ccl).html(val);
 				last.addClass((tr?"ui-widget-header ":"")+"jstree-grid-header jstree-grid-header-"+classAdd);

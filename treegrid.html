@@ -1,7 +1,7 @@
 <html>
 	<head>
-		<title>jstree treegrid 3.2.0 plugin demo</title>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+		<title>jstree-grid plugin demo</title>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" rel="stylesheet">
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet">
 		<script type='text/javascript' src='http://code.jquery.com/jquery-2.1.0.js'></script>
 		<script type='text/javascript' src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -9,261 +9,90 @@
 		<script type="text/javascript" src="jstreegrid.js"></script>
 		<style type="text/css">
 			@import url('http://getbootstrap.com/dist/css/bootstrap.css');
+			body {
+				margin: 1em;
+			}
+			.jstree-grid-wrapper {
+				border: 1px solid #ccc;
+			}
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function(){
+				// tree data
 				var data;
-				
 				data = [{
-					text: "Root 1",
-					data: {price: 5, size: 4,spanclass:"root"},
-					children: [
-						{text: "Really long named child whose name gets cut off", data: {price: 4, size: "3",spanclass:"first"}},
-						{text: "Child 2", data: {price: 8, size: 2,spanclass:"second"}, children:[
-							{text:"Grandchild",data:{price: 100,size:10,spanclass:"third"}}
-						]}
-					]
+					text: "Products",
+					data: {},
+					children: [{
+						text: "Fruit",
+						data: {}, 
+						children:[
+							{text: "Apple", data: {price: 0.1, quantity: 20}},
+							{text: "Banana", data: {price: 0.2, quantity: 31}},
+							{text: "Grapes", data: {price: 1.99, quantity: 34}},
+							{text: "Mango", data: {price: 0.5, quantity: 8}},
+							{text: "Melon", data: {price: 0.8, quantity: 4}},
+							{text: "Pear", data: {price: 0.1, quantity: 30}},
+							{text: "Strawberry", data: {price: 0.15, quantity: 32}}
+						],
+						'state': {'opened': true}
+					}, {
+						text: "Vegetables",
+						data: {}, 
+						children:[
+							{text: "Aubergine", data: {price: 0.5, quantity: 8}},
+							{text: "Broccoli", data: {price: 0.4, quantity: 22}},
+							{text: "Carrot", data: {price: 0.1, quantity: 32}},
+							{text: "Cauliflower", data: {price: 0.45, quantity: 18}},
+							{text: "Potato", data: {price: 0.2, quantity: 38}}
+						]
+					}],
+					'state': {'opened': true}
 				}];
 				
-				$("div#jstree").bind("loaded_grid.jstree",function(){
-					$("span#status").text("loaded");
-				}).on("select_cell.jstree-grid",function (e,data) {
-					$("span#clicked").html("clicked "+data.column+" of value "+data.value);
-				}).on('update_cell.jstree-grid',function (e,data) {
-					$("span#changed").html("changed "+data.col+" from "+data.old+" to "+data.value);
-				});
-				
-				
+				// load jstree
 				$("div#jstree").jstree({
-					plugins: ["themes","json","grid","dnd","contextmenu","search","sort"],
+					plugins: ["grid","dnd","contextmenu","sort"],
 					core: {
 						data: data
 					},
+					// configure tree grid
 					grid: {
 						columns: [
-							{width: 110, header: "Nodes",title:"_DATA_"},
-							{width: 110, cellClass: "col1", value: "price", header: "<i>Price</i>", title:"price", valueClass:"spanclass"},
-							{width: 110, cellClass: "col2", value: "size", header: "Qty", title:"size",valueClass:"spanclass"}
+							{width: 200, header: "Name"},
+							{width: 150, value: "price", header: "Price", format: function(v) {if (v){ return '$'+v.toFixed(2) }}},
+							{width: 150, value: "quantity", header: "Qty"}
 						],
-						resizable:true,
-						draggable:true,
-						contextmenu:true,
-						contextmenu:true,
-						width: 306,
-						height: 100
-					},
-					dnd: {
-						drop_finish : function () { 
-						}, 
-						drag_finish : function () { 
-						}, 
-						drag_check : function (data) { 
-							return {
-								after : true, 
-								before : true, 
-								inside : true 
-							};
-						} 
-					}
-				})
-				.on('loaded.jstree', function() {
-					$("div#jstree").jstree('open_all');
-				});
-				$("a#change").click(function(){
-					var tree = $("div#jstree").jstree(), 
-					nodename = tree.get_node("#").children[0], node = tree.get_node(nodename),
-					val = parseInt(node.data.size);
-					
-					node.data.size = node.data.size*2;
-					tree.trigger("change_node.jstree",nodename);
-					
-					return(false);
-				});
-
-				$("a#refresh").click(function(){
-					var tree = $("div#jstree").jstree();
-					var data = [{
-						text: "Root 1",
-						data: {price: "$5.00", size: "4"}
-					}];
-					tree.settings.core.data = data;
-					tree.refresh();
-					return(false);
-				});
-				$("input#search").keyup(function (e) {
-					var tree = $("div#jstree").jstree();
-					tree.search($(this).val());
-				});
-				
-				// Do the second tree
-				$("div#jstreex").bind("loaded_grid.jstree",function(){
-					$("span#xstatus").text("loaded");
-				});
-				$("div#jstreex").jstree({
-					plugins: ["themes","json","grid","dnd"],
-					core: {
-						data: data
-					},
-					grid: {
-						columns: [
-							{width: 110, header: "Nodes",title:"_DATA_"},
-							{cellClass: "col1", value: "price", width: 60, header: "Price", title:"price"},
-							{cellClass: "col2", value: "size", width: 60, header: "Qty", title:"size"}
-						]
-					},
-					dnd: {
-		                drop_finish : function () { 
-		                }, 
-		                drag_finish : function () { 
-		                }, 
-		                drag_check : function (data) { 
-		                    return { 
-		                        after : true, 
-		                        before : true, 
-		                        inside : true 
-		                    }; 
-		                } 
-					}
-				});
-				
-				$("div#jstreec").bind("loaded_grid.jstree",function () {
-					$("span#cstatus").text("loaded")
-				});
-			  $('div#jstreec').jstree({
-			    plugins: ['grid', 'types'],
-			    core: {
-			      themes: {variant: 'small'},
-			      data: [{
-			        text: "Root",
-			        type: "default",
-			        state: {opened: true},
-			        data: {column1: 'foo'},
-			        children: [
-			          {
-									text: 'Level1',
-			          	type: "default",
-			          	data: {column1: 'bar'}
-								}
-							]
-						}]
-			    },
-			    grid: {
-			      columns: [
-		          {header: 'Name' , width: 200},
-		          {header: 'Column1' , width: 200, value: 'column1'}]
-			    },
-			    types : {
-			      default: {
-			        icon : "glyphicon glyphicon-folder-open"
-			      }
-			    }
-			  });
-				$("div#jstreef").bind("loaded_grid.jstree",function(){
-					$("span#fstatus").text("loaded");
-				});
-				$("div#jstreef").jstree({
-					plugins: ["themes","json","grid","dnd"],
-					core: {
-						data: data
-					},
-					grid: {
-						columns: [
-							{width: 110, header: "Nodes",title:"_DATA_"},
-							{cellClass: "col1", value: "price", format: function(v){return "$"+v.toFixed(2);}, width: 60, header: "Price", title:"price"},
-							{cellClass: "col2", value: "size", width: 60, header: "Qty", title:"size"}
-						],
-						resizable:true
-					},
-					dnd: {
-						drop_finish : function () { 
-						}, 
-						drag_finish : function () { 
-						}, 
-						drag_check : function (data) { 
-							return { 
-								after : true, 
-								before : true, 
-								inside : true 
-							}; 
-						} 
-					}
-				});
-				$("div#jstree5div").jstree({
-					plugins: ["themes","json","grid","dnd","contextmenu"],
-					core: {
-						data: data
-					},
-					grid: {
-						columns: [
-							{cellClass: "col1", value: "price", width: 60, header: "<i>Price</i>", title:"price"},
-							{width: 110, header: "Nodes",title:"_DATA_",tree:true},
-							{cellClass: "col2", value: "size", header: "Qty", title:"size"}
-						],
-						resizable:true,
-						contextmenu:true
-					},
-					dnd: {
-						drop_finish : function () { 
-						}, 
-						drag_finish : function () { 
-						}, 
-						drag_check : function (data) { 
-							return { 
-								after : true, 
-								before : true, 
-								inside : true 
-							}; 
-						} 
+						resizable: true,
+						draggable: true,
+						contextmenu: true,
+						width: 500,
+						height: 300
 					}
 				});
 			});
 		</script>
 	</head>
 	<body>
-		<h2>Tree Grid 3.2.0 Demo</h2>
-		This page gives a demo for using the excellent <a href="http://www.jstree.com">jstree</a>, built on the
-		amazing <a href="http://jquery.com">jQuery</a> library, with a tree grid. The treegrid is implemented
-		as a standard jstree plugin. Simply include jquery and jstree, and the plugin library jstreegrid.js,
-		and include it as a plugin. Look at the source to this page to see how it is done.
-		<p/>
-		Some interesting feature usage. Check out the HTML and JS config to see the details:
+		<h2>JsTree Grid Demo</h2>
+		This page gives a demo for using the excellent <a href="http://www.jstree.com">jstree</a> with a treegrid.
+		The treegrid is implemented as a standard jstree plugin.
+		Include jquery and jstree, and the plugin library jstreegrid.js, and include it as a plugin. 
+		Look at the source to this page to see how it is done.
+		<p>
+			This example demonstrates advanced features including:
+	 	</p>
 		<ul>
-			<li>The first tree has resizable and draggable columns set to true, as well as contextmenu enabled.</li>
-			<li>The second tree has a max-height set to 30px, causing the tree itself - but not the headers - to scroll.</li>
-			<li>The third tree uses an alternate theme and styling.</li>
-			<li>The fourth tree uses a <i>format</i> function.</li>
-			<li>The fifth tree has 3 columns, but puts the tree in a different column.</li>
+			<li>Show / hide columns via context menu</li>
+			<li>Resizable columns</li>
+			<li>Column reordering</li>
+			<li>Draggable columns</li>
+			<li>Edit cells via context menu</li>
+			<li>Fixed height to enable scrolling</li>
+			<li>Cell formatting e.g. 10 => $10.00</li>
 		</ul>
 		<div id="jstree1">
-			<h4>First Tree</h4>
 			<div id="jstree"></div>
-			<div>Tree grid is <span id="status">loading</span>.</div>
-			<div><a href="#" id="change">Click here to double the root Qty</a></div>
-			<div><a href="#" id="refresh">Click here to refresh the tree</a></div>
-			<div>Search <input type="text" id="search"></input></div>
-			<div>Click a cell to see results: <span id="clicked"></span></div>
-			<div>Right-click a cell and edit to see results: <span id="changed"></span></div>
-		</div>
-		<div id="jstree2">
-			<h4>Second Tree</h4>
-			<div id="jstreex" style="max-height: 30px;"></div>
-			<div>Tree grid is <span id="xstatus">loading</span>.</div>
-		</div>
-		<div id="jstree3">
-			<h4>Third Tree</h4>
-			<div id="jstreec" style="max-height: 30px;"></div>
-			<div>Tree grid is <span id="cstatus">loading</span>.</div>
-		</div>
-		<div id="jstree4">
-			<h4>Fourth Tree</h4>
-			<div id="jstreef" style="max-height: 30px;"></div>
-			<div>Tree grid is <span id="fstatus">loading</span>.</div>
-		</div>
-		<div id="jstree5">
-			<h4>Fifth Tree</h4>
-			<div id="jstree5div" style="max-height: 30px;"></div>
-			<div>Tree grid is <span id="fivestatus">loading</span>.</div>
-		</div>
-		
+		</div>		
 	</body>
 </html>
