@@ -445,8 +445,9 @@
 				//col.appendTo(colgroup);
 				cl = cols[i].headerClass || "";
 				ccl = cols[i].columnClass || "";
-				val = cols[i].header || "";
-				name = cols[i].value || "text";
+				val = cols[i].header || "";				
+				name = typeof(cols[i].value) === "string" && cols[i].value || typeof(cols[i].value) === "undefined" && "text";
+				
 				if (val) {hasHeaders = true;}
 				if(gs.stateful && localStorage['jstree-root-'+rootid+'-column-'+i])
 					width = localStorage['jstree-root-'+rootid+'-column-'+i];
@@ -462,7 +463,9 @@
 				last = $("<div></div>").css(conf).addClass("jstree-grid-div-"+this.uniq+"-"+i+" "+(tr?"ui-widget-header ":"")+" jstree-grid-header jstree-grid-header-cell jstree-grid-header-"+classAdd+" "+cl+" "+ccl).html(val);
 				last.addClass((tr?"ui-widget-header ":"")+"jstree-grid-header jstree-grid-header-"+classAdd);
 				last.prependTo(col);
-				last.attr(COL_DATA_ATTR, name);
+				if (name) {
+					last.attr(COL_DATA_ATTR, name);
+				}
 				totalWidth += last.outerWidth();
 				puller = $("<div class='jstree-grid-separator jstree-grid-separator-"+classAdd+(tr ? " ui-widget-header" : "")+(resizable? " jstree-grid-resizable-separator":"")+"'>&nbsp;</div>").appendTo(last);
 				col.width(width);
@@ -576,35 +579,35 @@
 					// don't sort after resize
 					e.stopPropagation();
 				})
-				.on("click", ".jstree-grid-header-cell", function (e) {
-					if (!_this.sort) {
-						return;
-					}
-
-					// get column
-					var name = $(this).attr(COL_DATA_ATTR);
-
-					// sort order
-					var symbol;
-					if (gs.sortOrder === name && gs.sortAsc === true) {
-						gs.sortAsc = false;
-						symbol = "&darr;";
-					} else {
-						gs.sortOrder = name;
-						gs.sortAsc = true;
-						symbol = "&uarr;";
-					}
-
-					// add sort arrow
-					$(this.closest('.jstree-grid-wrapper')).find(".jstree-grid-sort-icon").remove();
-					$("<span></span>").addClass("jstree-grid-sort-icon").appendTo($(this)).html(symbol);
-
-					// sort by column
-					var rootNode = _this.get_node('#');
-					_this.sort(rootNode, true);
-					_this.redraw_node(rootNode, true);
-				});
 			}
+			
+			this.gridWrapper.on("click", ".jstree-grid-header-cell", function (e) {
+				if (!_this.sort) { return; }
+			
+				// get column
+				var name = $(this).attr(COL_DATA_ATTR);					
+				if (!name) { return; }
+			
+				// sort order
+				var symbol;
+				if (gs.sortOrder === name && gs.sortAsc === true) {
+					gs.sortAsc = false;
+					symbol = "&darr;";
+				} else {
+					gs.sortOrder = name;
+					gs.sortAsc = true;
+					symbol = "&uarr;";
+				}
+			
+				// add sort arrow
+				$(this.closest('.jstree-grid-wrapper')).find(".jstree-grid-sort-icon").remove();
+				$("<span></span>").addClass("jstree-grid-sort-icon").appendTo($(this)).html(symbol);
+			
+				// sort by column
+				var rootNode = _this.get_node('#');
+				_this.sort(rootNode, true);
+				_this.redraw_node(rootNode, true);
+			});
 		};
 		/*
 		 * Override redraw_node to correctly insert the grid
