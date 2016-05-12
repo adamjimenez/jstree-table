@@ -564,7 +564,7 @@
 					// don't sort after resize
 					e.stopPropagation();
 				})
-			}		
+			}
 			
 			this.gridWrapper.on("click", ".jstree-grid-header-cell", function (e) {
 				if (!_this.sort) { return; }
@@ -583,10 +583,6 @@
 					gs.sortAsc = true;
 					arrowClass = gs.arrowUpIcon;
 				}
-				
-				// highlight header cell
-				$(this.closest('.jstree-grid-wrapper')).find(".jstree-clicked").removeClass("jstree-clicked");
-				$(this).addClass("jstree-clicked");
 			
 				// add sort arrow
 				$(this.closest('.jstree-grid-wrapper')).find(".jstree-grid-sort-icon").remove();
