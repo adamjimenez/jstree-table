@@ -188,7 +188,7 @@
 				if (!styled) {
 					styled = true;
 					styles = [
-						'.jstree-grid-cell {vertical-align: top; overflow:hidden;margin-left:0;position:relative;width: 100%;padding-left:7px;white-space: nowrap;}',
+						'.jstree-grid-cell {vertical-align: top; overflow:hidden;margin-left:0;width: 100%;padding-left:7px;white-space: nowrap;}',
 						'.jstree-grid-cell span {margin-right:0px;margin-right:0px;*display:inline;*+display:inline;white-space: nowrap;}',
 						'.jstree-grid-separator {position:absolute; top:0; right:0; height:24px; margin-left: -2px; border-width: 0 2px 0 0; *display:inline; *+display:inline; margin-right:0px;width:0px;}',
 						'.jstree-grid-header-cell {overflow: hidden; white-space: nowrap;padding: 4px 3px 2px 5px; cursor: default;}',
@@ -203,6 +203,10 @@
 						'.jstree-grid-column {display: table-cell; overflow: hidden;}',
 						'.jstree-grid-col-0 {width: 100%;}',
 						'.jstree-grid-sort-icon {font-size: 8px; position: absolute; top:0; left: calc(50% - 4px);}',
+						'.jstree-grid-midwrapper a.jstree-clicked, .jstree-grid-midwrapper a.jstree-hovered{background: transparent; border-color: transparent;}',
+						'.jstree-grid-midwrapper a.jstree-clicked:before, .jstree-grid-midwrapper a.jstree-hovered:before {position: absolute; left: 0; content:""; width: 100%; height: 24px; z-index: -1;}',
+						'.jstree-grid-midwrapper a.jstree-hovered:before {background: #e7f4f9;}',
+						'.jstree-grid-midwrapper a.jstree-clicked:before {background: #beebff;}',
 						'.vakata-context {z-index:2;}'
 					];
 
@@ -339,35 +343,6 @@
 					//renderAWidth($(elm),this);
 				},this));
 				
-			},this))
-			.on("hover_node.jstree",$.proxy(function(node,selected,event){
-				var id = selected.node.id;
-				if (this._hover_node !== null && this._hover_node !== undefined) {
-					findDataCell(this.gridWrapper,this._hover_node).removeClass("jstree-hovered");
-				}
-				this._hover_node = id;
-				findDataCell(this.gridWrapper,id).addClass("jstree-hovered");
-			},this))
-			.on("dehover_node.jstree",$.proxy(function(node,selected,event){
-				var id = selected.node.id;
-				this._hover_node = null;
-				findDataCell(this.gridWrapper,id).removeClass("jstree-hovered");
-			},this))
-			.on("select_node.jstree",$.proxy(function(node,selected,event){
-				var id = selected.node.id;
-				findDataCell(this.gridWrapper,id).addClass("jstree-clicked");
-				this.get_node(selected.node.id,true).children("div.jstree-grid-cell").addClass("jstree-clicked");
-			},this))
-			.on("deselect_node.jstree",$.proxy(function(node,selected,event){
-				var id = selected.node.id;
-				findDataCell(this.gridWrapper,id).removeClass("jstree-clicked");
-			},this))
-			.on("deselect_all.jstree",$.proxy(function(node,selected,event){
-				// get all of the ids that were unselected
-				var ids = selected.node || [], i;
-				for (i=0;i<ids.length;i++) {
-					findDataCell(this.gridWrapper,ids[i]).removeClass("jstree-clicked");
-				}
 			},this))
 			.on("search.jstree", $.proxy(function (e, data) {
 				// search sometimes filters, so we need to hide all of the appropriate grid cells as well, and show only the matches
