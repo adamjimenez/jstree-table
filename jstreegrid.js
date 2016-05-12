@@ -758,6 +758,9 @@
 		};
 		
 		this.autosize_column = function (col) {
+			// don't resize hidden columns
+			if (col.is(":hidden")) { return; }
+			
 			var oldPrevColWidth = parseFloat(col.css("width")), newWidth = 0, diff,
 			colNum = col.prevAll(".jstree-grid-column").length,
 			oldPrevHeaderInner = col.width(), newPrevColWidth;			
