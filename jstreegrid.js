@@ -600,37 +600,35 @@
 			
 			// header context menu
 			this.midWrapper.on("contextmenu", ".jstree-grid-header-cell", function(e) {
-				if (!gs.headerContextMenu) { return; }				
-					if (gs.context) {
-						e.preventDefault();
-						
-						var options = {
-							"fit":{label:"Size column to fit","action": function (data) {								
-								var col = $(e.target).closest("div.jstree-grid-column");
-								_this.autosize_column(col);
-							}},
-							"fitAll":{"separator_after": true,label:"Size all columns to fit","action": function (data) {
-								_this.autosize_all_columns();
-							}}
-						};
-						
-						// create menu item for every header cell
-						var cell, icon, value, label;
-						_this.midWrapper.find(".jstree-grid-header-cell").each(function() {
-							cell = $(this);
-							icon = cell.is(":visible") ? gs.checkIcon : false;
-							value = cell.attr(COL_DATA_ATTR);
-							//get label without sorting arrows
-							label = cell.clone().children('.jstree-grid-sort-icon').remove().end().text().trim();
+				if (!gs.headerContextMenu) { return; }
+					e.preventDefault();
+					
+					var options = {
+						"fit":{label:"Size column to fit","action": function (data) {								
+							var col = $(e.target).closest("div.jstree-grid-column");
+							_this.autosize_column(col);
+						}},
+						"fitAll":{"separator_after": true,label:"Size all columns to fit","action": function (data) {
+							_this.autosize_all_columns();
+						}}
+					};
+					
+					// create menu item for every header cell
+					var cell, icon, value, label;
+					_this.midWrapper.find(".jstree-grid-header-cell").each(function() {
+						cell = $(this);
+						icon = cell.is(":visible") ? gs.checkIcon : false;
+						value = cell.attr(COL_DATA_ATTR);
+						//get label without sorting arrows
+						label = cell.clone().children('.jstree-grid-sort-icon').remove().end().text().trim();
 
-							options[value] = {icon:icon, column:value, label:label, _disabled: (value === 'text'), "action": function (data) {
-								var col = _this.midWrapper.find(".jstree-grid-header-cell["+COL_DATA_ATTR+"='"+data.item.column+"']").parent();
-								col.toggle();
-							}};
-						});
-						
-						$.vakata.context.show(this,{ 'x' : e.pageX, 'y' : e.pageY },options);
-					}
+						options[value] = {icon:icon, column:value, label:label, _disabled: (value === 'text'), "action": function (data) {
+							var col = _this.midWrapper.find(".jstree-grid-header-cell["+COL_DATA_ATTR+"='"+data.item.column+"']").parent();
+							col.toggle();
+						}};
+					});
+					
+					$.vakata.context.show(this,{ 'x' : e.pageX, 'y' : e.pageY },options);
 			});	
 		};
 		/*
