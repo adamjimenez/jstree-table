@@ -194,7 +194,7 @@
 						'.jstree-grid-header-cell {overflow: hidden; white-space: nowrap;padding: 4px 3px 2px 5px; cursor: default;}',
 						'.jstree-grid-header-themeroller {border: 0; padding: 1px 3px;}',
 						'.jstree-grid-header-regular {position:relative; background-color: #CBF3FD; z-index: 1;}',
-						'.jstree-grid-resizable-separator {cursor: col-resize; width: 2px;}',
+						'.jstree-grid-resizable-separator {cursor: col-resize; width: 10px;}',
 						'.jstree-grid-separator-regular {border-color: #d0d0d0; border-style: solid;}',
 						'.jstree-grid-cell-themeroller {border: none !important; background: transparent !important;}',
 						'.jstree-grid-wrapper {table-layout: fixed; width: 100%; overflow: auto; position: relative;}',
