@@ -135,6 +135,8 @@
 	};
 
 	$.jstree.plugins.grid = function(options,parent) {
+		var _this = this;
+		
 		this._initialize = function () {
 			if (!this._initialized) {
 				var s = this.settings.grid || {}, styles,	container = this.element, gridparent = container.parent(), i,
@@ -153,6 +155,8 @@
 					sortOrder: 'text',
 					sortAsc: true,
 					fixedHeader: s.fixedHeader || true,
+					headerContextMenu: s.headerContextMenu || true,
+					checkIcon: 'fa fa-check',
 					width: s.width,
 					height: s.height
 				}, cols = gs.columns, treecol = 0;
@@ -195,7 +199,8 @@
 						'.jstree-grid-midwrapper {display: table-row;}',
 						'.jstree-grid-width-auto {width:auto;display:block;}',
 						'.jstree-grid-column {display: table-cell; overflow: hidden;}',
-						'.jstree-grid-col-0 {width: 100%;}'
+						'.jstree-grid-col-0 {width: 100%;}',
+						'.vakata-context {z-index:2;}'
 					];
 
 					$('<style type="text/css">'+styles.join("\n")+'</style>').appendTo("head");
@@ -554,42 +559,14 @@
 					return false;
 				})
 				.on("dblclick", ".jstree-grid-resizable-separator", function (e) {
-					var clickedSep = $(this), col = clickedSep.closest("div.jstree-grid-column"),
-					oldPrevColWidth = parseFloat(col.css("width")), newWidth = 0, diff,
-					colNum = col.prevAll(".jstree-grid-column").length,
-					oldPrevHeaderInner = col.width(), newPrevColWidth;
-					
-			
-					//find largest width
-					col.find(".jstree-grid-cell").each(function() {
-						var item = $(this), width;
-						item.css("position", "absolute");
-						item.css("width", "auto");
-						width = item.outerWidth();
-						item.css("position", "relative");
-					
-						if (width>newWidth) {
-							newWidth = width;
-						}
-					});
-				
-					diff = newWidth-oldPrevColWidth;
-				
-					// make sure that diff cannot be beyond the left limits
-					diff = diff < 0 ? Math.max(diff,-oldPrevHeaderInner) : diff;
-					newPrevColWidth = (oldPrevColWidth+diff)+"px";
-				
-					col.width(newPrevColWidth);
-					col.css("min-width",newPrevColWidth);
-					col.css("max-width",newPrevColWidth);
-
-					$(this).closest(".jstree-grid-wrapper").find(".jstree").trigger("resize_column.jstree-grid",[colNum,newPrevColWidth]);
+					var col = $(this).closest("div.jstree-grid-column");
+					_this.autosize_column(col);
 				})
 				.on("click", ".jstree-grid-separator", function (e) {
 					// don't sort after resize
 					e.stopPropagation();
 				})
-			}
+			}		
 			
 			this.gridWrapper.on("click", ".jstree-grid-header-cell", function (e) {
 				if (!_this.sort) { return; }
@@ -622,6 +599,41 @@
 				_this.sort(rootNode, true);
 				_this.redraw_node(rootNode, true);
 			});
+			
+			// header context menu
+			this.midWrapper.on("contextmenu", ".jstree-grid-header-cell", function(e) {
+				if (!gs.headerContextMenu) { return; }				
+					if (gs.context) {
+						e.preventDefault();
+						
+						var options = {
+							"fit":{label:"Size column to fit","action": function (data) {								
+								var col = $(e.target).closest("div.jstree-grid-column");
+								_this.autosize_column(col);
+							}},
+							"fitAll":{"separator_after": true,label:"Size all columns to fit","action": function (data) {
+								_this.autosize_all_columns();
+							}}
+						};
+						
+						// create menu item for every header cell
+						var cell, icon, value, label;
+						_this.midWrapper.find(".jstree-grid-header-cell").each(function() {
+							cell = $(this);
+							icon = cell.is(":visible") ? gs.checkIcon : false;
+							value = cell.attr(COL_DATA_ATTR);
+							//get label without sorting arrows
+							label = cell.clone().children('.jstree-grid-sort-icon').remove().end().text().trim();
+
+							options[value] = {icon:icon, column:value, label:label, _disabled: (value === 'text'), "action": function (data) {
+								var col = _this.midWrapper.find(".jstree-grid-header-cell["+COL_DATA_ATTR+"='"+data.item.column+"']").parent();
+								col.toggle();
+							}};
+						});
+						
+						$.vakata.context.show(this,{ 'x' : e.pageX, 'y' : e.pageY },options);
+					}
+			});	
 		};
 		/*
 		 * Override redraw_node to correctly insert the grid
@@ -776,6 +788,43 @@
 		};
 		this.grid_show_column = function (col) {
 			this.midWrapper.find(".jstree-grid-column-"+col).show();
+		};
+		
+		this.autosize_column = function (col) {
+			var oldPrevColWidth = parseFloat(col.css("width")), newWidth = 0, diff,
+			colNum = col.prevAll(".jstree-grid-column").length,
+			oldPrevHeaderInner = col.width(), newPrevColWidth;			
+	
+			//find largest width
+			col.find(".jstree-grid-cell").each(function() {
+				var item = $(this), width;
+				item.css("position", "absolute");
+				item.css("width", "auto");
+				width = item.outerWidth();
+				item.css("position", "relative");
+			
+				if (width>newWidth) {
+					newWidth = width;
+				}
+			});
+		
+			diff = newWidth-oldPrevColWidth;
+		
+			// make sure that diff cannot be beyond the left limits
+			diff = diff < 0 ? Math.max(diff,-oldPrevHeaderInner) : diff;
+			newPrevColWidth = (oldPrevColWidth+diff)+"px";
+		
+			col.width(newPrevColWidth);
+			col.css("min-width",newPrevColWidth);
+			col.css("max-width",newPrevColWidth);
+
+			$(this).closest(".jstree-grid-wrapper").find(".jstree").trigger("resize_column.jstree-grid",[colNum,newPrevColWidth]);
+		};
+		
+		this.autosize_all_columns = function () {
+			this.gridWrapper.find(".jstree-grid-column").each(function() {
+				_this.autosize_column($(this));
+			});
 		};
 		
 		this._prepare_grid = function (obj) {
