@@ -95,6 +95,8 @@ We use the div to control the entire height and width, and the span to get acces
 * `contextmenu`: true/false whether or not a context menu for editing the cells should be shown on right-click. Defaults to false.
 * `headerContextMenu`: true/false whether or not a context menu for managing columns should be shown on right-click. Defaults to true.
 * `checkIcon`: class for the context menu check icons. Defaults to 'fa fa-check' (Font Awesome).
+* `arrowUpIcon`: class for the up arrow icon. Defaults to 'fa fa-chevron-up' (Font Awesome).
+* `arrowDownIcon`: class for the down arrow icon. Defaults to 'fa fa-chevron-down' (Font Awesome).
 
 The reason for both `valueClass` and `wideValueClass` is to give you the ability to control both the narrow part of the text,  and the entire width of the cell. For example, if the cell is 56px wide, but the text in it is "OK" and thus only 20px wide.
 Suppose you have a class "important" which backgrounds in red, and a class "clickable" which changes the cursor to a pointer.
