@@ -103,10 +103,7 @@ Suppose you have a class "important" which backgrounds in red, and a class "clic
 You want the entire width of the cell to be red, but just the word "OK" to be clickable. 
 You would ensure that "clickable" is applied to the span, but important to the div.
 
-Value is one of:
-
-* the name of the property of the node data whose content will be used; you can choose which once for the entire grid. 
-* a function, which will be passed the node's data given by `tree.get_node(node)` for the individual tree item. If you want your custom data, access it via `node.data`
+Value is the name of the property of the node data whose content will be used.
 
 Thus, if you have a node whose data is given by:
 

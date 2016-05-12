@@ -223,7 +223,7 @@
 					$("<div></div>").addClass("jstree-default jstree-grid-column jstree-grid-column-"+i+" jstree-grid-column-root-"+this.rootid).appendTo(this.midWrapper);
 					
 					if (typeof(cols[i].value) === "function") {
-						console.warn("[jstree-grid] using value as a function is deprecated, use 'format' option instead.");
+						console.warn("[jstree-grid] using value as a function is no longer supported, use 'format' option instead.");
 					}
 				}
 				this.midWrapper.children("div:eq("+treecol+")").append(container);
@@ -458,7 +458,7 @@
 				cl = cols[i].headerClass || "";
 				ccl = cols[i].columnClass || "";
 				val = cols[i].header || "";				
-				name = typeof(cols[i].value) === "string" && cols[i].value || typeof(cols[i].value) === "undefined" && "text";
+				name = cols[i].value || "text";
 				
 				if (val) {hasHeaders = true;}
 				if(gs.stateful && localStorage['jstree-root-'+rootid+'-column-'+i])
@@ -906,17 +906,10 @@
 					dataCell.addClass(ccl);
 
 
-					// get the contents of the cell - value could be a string or a function
-					if (col.value !== undefined && col.value !== null) {
-						if (typeof(col.value) === "function") {
-							val = col.value(objData);
-						} else if (objData.data !== null && objData.data !== undefined && objData.data[col.value] !== undefined) {
-							val = objData.data[col.value];
-						} else {
-							val = "";
-						}
-					} else {
-						val = "";
+					// get the contents of the cell
+					val = "";
+					if (objData.data && objData.data[col.value] !== undefined) {
+						val = objData.data[col.value];
 					}
 					
 					if (typeof(col.format) === "function") {
