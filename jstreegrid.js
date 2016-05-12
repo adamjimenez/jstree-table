@@ -466,11 +466,6 @@
 				else
 					width = cols[i].width || defaultWidth;
 
-				// we only deal with borders if width is not auto and not percentages
-				borPadWidth = tr ? 1+6 : 2+8; // account for the borders and padding
-				if (width !== 'auto' && typeof(width) !== "string") {
-					width -= borPadWidth;
-				}
 				col = this.midWrapper.children("div.jstree-grid-column-"+i);
 				last = $("<div></div>").css(conf).addClass("jstree-grid-div-"+this.uniq+"-"+i+" "+(tr?"ui-widget-header ":"")+" jstree-grid-header jstree-grid-header-cell jstree-grid-header-"+classAdd+" "+cl+" "+ccl).html(val);
 				last.addClass((tr?"ui-widget-header ":"")+"jstree-grid-header jstree-grid-header-"+classAdd);
