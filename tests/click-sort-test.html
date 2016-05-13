@@ -1,10 +1,10 @@
 <html>
 	<head>
-		<title>jstree treegrid sort test</title>
+		<title>jstree treetable sort test</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 		<script type='text/javascript' src='http://code.jquery.com/jquery-2.1.0.js'></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-		<script type="text/javascript" src="../jstreegrid.js"></script>
+		<script type="text/javascript" src="../jstreetable.js"></script>
 		<style type="text/css">
 			@import url('http://getbootstrap.com/dist/css/bootstrap.css');
 		</style>
@@ -23,21 +23,21 @@
 					]
 				}];
 				
-				$("div#jstree").bind("loaded_grid.jstree",function(){
+				$("div#jstree").bind("loaded_table.jstree",function(){
 					$("span#status").text("loaded");
-				}).on("select_cell.jstree-grid",function (e,data) {
+				}).on("select_cell.jstree-table",function (e,data) {
 					$("span#clicked").html("clicked "+data.column+" of value "+data.value);
-				}).on('update_cell.jstree-grid',function (e,data) {
+				}).on('update_cell.jstree-table',function (e,data) {
 					$("span#changed").html("changed "+data.col+" from "+data.old+" to "+data.value);
 				});
 				
 				
 				$("div#jstree").jstree({
-					plugins: ["themes","json","grid","dnd","contextmenu","search","sort"],
+					plugins: ["themes","json","table","dnd","contextmenu","search","sort"],
 					core: {
 						data: data
 					},
-					grid: {
+					table: {
 						columns: [
 							{width: 110, header: "Nodes",title:"_DATA_"},
 							{cellClass: "col1", value: "price", header: "<i>Price</i>", title:"price", valueClass:"spanclass"},
@@ -89,11 +89,11 @@
 		</script>
 	</head>
 	<body>
-		<h2>Tree Grid Click Sort Test</h2>
+		<h2>Tree table Click Sort Test</h2>
 		<div id="jstree1">
 			<h4>First Tree</h4>
 			<div id="jstree"></div>
-			<div>Tree grid is <span id="status">loading</span>.</div>
+			<div>Tree table is <span id="status">loading</span>.</div>
 			<div><a href="#" id="change">Click here to double the root Qty</a></div>
 			<div><a href="#" id="refresh">Click here to refresh the tree</a></div>
 			<div>Search <input type="text" id="search"></input></div>

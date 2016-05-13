@@ -1,11 +1,11 @@
 <html>
 	<head>
-		<title>jstreegrid dynamic root node test</title>
+		<title>jstreetable dynamic root node test</title>
 		<link rel="stylesheet" href="../lib/themes-3/default/style.min.css" />
 		<script type='text/javascript' src='http://code.jquery.com/jquery-2.1.0.js'></script>
 		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 		<script type="text/javascript" src="../lib/jstree-3.3.0-patched.js"></script>
-		<script type="text/javascript" src="../jstreegrid.js"></script>
+		<script type="text/javascript" src="../jstreetable.js"></script>
 		<style type="text/css">
 			@import url('http://getbootstrap.com/dist/css/bootstrap.css');
 			@import url('http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css');
@@ -37,7 +37,7 @@
 		            },
            
 		        },
-		        grid = {
+		        table = {
 		            columns: [
 		                { width: 210, header: "Nodes", title: "_DATA_" },
 		                { cellClass: "col1", value: "price", width: 60, header: "Price", title: "price" },
@@ -51,17 +51,17 @@
 		            data: data,
 		             "check_callback": true
 		        },
-		        grid: grid,
+		        table: table,
 		        "types": types,
-		        plugins: ["themes", "json", "grid", "dnd","contextmenu"]
-		        // remove "grid" from above and it works fine with empty data
+		        plugins: ["themes", "json", "table", "dnd","contextmenu"]
+		        // remove "table" from above and it works fine with empty data
 		    });
 		    $("#tree_only").jstree({
 		        "core": {
 		            data: [],
 		             "check_callback": true
 		        },
-		        grid: grid,
+		        table: table,
 		        "types": types,
 		        plugins: ["themes", "json", "dnd","contextmenu"]
 		    });
@@ -70,10 +70,10 @@
 		            data: [],
 		             "check_callback": true
 		        },
-		        grid: grid,
+		        table: table,
 		        "types": types,
-		        plugins: ["themes", "json", "grid", "dnd","contextmenu"]
-		        // remove "grid" from above and it works fine with empty data
+		        plugins: ["themes", "json", "table", "dnd","contextmenu"]
+		        // remove "table" from above and it works fine with empty data
 		    });
 
 		    //Add action on menu
@@ -106,7 +106,7 @@
 	</head>
 	<body>
 
-		<h2>Tree Grid Dynamic Root Test</h2>
+		<h2>Tree table Dynamic Root Test</h2>
 
 			<div class="container-fluid">
 			  <div class="row">
@@ -140,7 +140,7 @@
 						        <input id="add_folder" type="button" value="add node"/>
 						        <input id="remove" type="button" value="remove node"/>
 						    </div>
-						    <div>Tree without grid (works)</div>
+						    <div>Tree without table (works)</div>
 						    <div class="mytree" id="tree_only"></div>
 						</div>  
 						</div>
