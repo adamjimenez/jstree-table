@@ -1,5 +1,7 @@
 # jsTreeTable
 
+![jstree-table](https://cloud.githubusercontent.com/assets/573192/15243026/346e6d9e-18f1-11e6-8ed2-eb0630e6ad9b.jpg)
+
 ## Overview
 Plugin for the jstree www.jstree.com tree component that provides columns to the tree.
 
