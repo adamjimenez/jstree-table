@@ -3,6 +3,8 @@
 ## Overview
 Plugin for the jstree www.jstree.com tree component that provides columns to the tree.
 
+[DEMO](https://jsfiddle.net/adamjimenez/x9wd6k3x/)
+
 ## Usage
 
 1. Include jquery (>= 1.4.2) and jstree (>=3.0.0) in your page.
