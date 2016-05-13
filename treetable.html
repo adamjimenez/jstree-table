@@ -1,18 +1,18 @@
 <html>
 	<head>
-		<title>jstree-grid plugin demo</title>
+		<title>jstree-table plugin demo</title>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" rel="stylesheet">
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet">
 		<script type='text/javascript' src='http://code.jquery.com/jquery-2.1.0.js'></script>
 		<script type='text/javascript' src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-		<script type="text/javascript" src="jstreegrid.js"></script>
+		<script type="text/javascript" src="jstreetable.js"></script>
 		<style type="text/css">
 			@import url('http://getbootstrap.com/dist/css/bootstrap.css');
 			body {
 				margin: 1em;
 			}
-			.jstree-grid-wrapper {
+			.jstree-table-wrapper {
 				border: 1px solid #ccc;
 			}
 		</style>
@@ -52,12 +52,12 @@
 				
 				// load jstree
 				$("div#jstree").jstree({
-					plugins: ["grid","dnd","contextmenu","sort"],
+					plugins: ["table","dnd","contextmenu","sort"],
 					core: {
 						data: data
 					},
-					// configure tree grid
-					grid: {
+					// configure tree table
+					table: {
 						columns: [
 							{width: 200, header: "Name"},
 							{width: 150, value: "price", header: "Price", format: function(v) {if (v){ return '$'+v.toFixed(2) }}},
@@ -74,10 +74,10 @@
 		</script>
 	</head>
 	<body>
-		<h2>JsTree Grid Demo</h2>
-		This page gives a demo for using the excellent <a href="http://www.jstree.com">jstree</a> with a treegrid.
-		The treegrid is implemented as a standard jstree plugin.
-		Include jquery and jstree, and the plugin library jstreegrid.js, and include it as a plugin. 
+		<h2>JsTree Table Demo</h2>
+		This page gives a demo for using the excellent <a href="http://www.jstree.com">jstree</a> with a table.
+		The table is implemented as a standard jstree plugin.
+		Include jquery and jstree, and the plugin library jstreetable.js, and include it as a plugin. 
 		Look at the source to this page to see how it is done.
 		<p>
 			This example demonstrates advanced features including:

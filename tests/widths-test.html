@@ -1,10 +1,10 @@
 <html>
 	<head>
-		<title>jstree treegrid 3.2.0 plugin demo</title>
+		<title>jstree treetable 3.2.0 plugin demo</title>
 		<link rel="stylesheet" href="../lib/themes-3/default/style.min.css" />
 		<script type='text/javascript' src='http://code.jquery.com/jquery-2.1.0.js'></script>
 		<script type="text/javascript" src="../lib/jstree-3.0.8.js"></script>
-		<script type="text/javascript" src="../jstreegrid.js"></script>
+		<script type="text/javascript" src="../jstreetable.js"></script>
 		<style type="text/css">
 			@import url('http://getbootstrap.com/dist/css/bootstrap.css');
 		</style>
@@ -26,11 +26,11 @@
 				trees = [
 					{
 						htmlheader: 'Fixed Width, All Columns Defined, Columns &lt; Width',
-						plugins: ["themes","json","grid"],
+						plugins: ["themes","json","table"],
 						core: {
 							data: data
 						},
-						grid: {
+						table: {
 							width: 400,
 							columns: [
 								{width: 150, header: "Nodes",title:"_DATA_"},
@@ -43,11 +43,11 @@
 					},
 					{
 						htmlheader: 'Fixed Width, All Columns Defined, Columns &gt; Width',
-						plugins: ["themes","json","grid"],
+						plugins: ["themes","json","table"],
 						core: {
 							data: data
 						},
-						grid: {
+						table: {
 							width: 400,
 							columns: [
 								{width: 200, header: "Nodes",title:"_DATA_"},
@@ -60,11 +60,11 @@
 					},
 					{
 						htmlheader: 'Fixed Width, All Columns Defined, Columns = Width',
-						plugins: ["themes","json","grid"],
+						plugins: ["themes","json","table"],
 						core: {
 							data: data
 						},
-						grid: {
+						table: {
 							width: 400,
 							columns: [
 								{width: 200, header: "Nodes",title:"_DATA_"},
@@ -77,11 +77,11 @@
 					},
 					{
 						htmlheader: 'Fixed Width, All Columns Defined, One auto Column',
-						plugins: ["themes","json","grid"],
+						plugins: ["themes","json","table"],
 						core: {
 							data: data
 						},
-						grid: {
+						table: {
 							width: 400,
 							columns: [
 								{width: 110, header: "Nodes",title:"_DATA_"},
@@ -94,11 +94,11 @@
 					},
 					{
 						htmlheader: 'Fixed Width, All Columns Defined, Two auto Columns',
-						plugins: ["themes","json","grid"],
+						plugins: ["themes","json","table"],
 						core: {
 							data: data
 						},
-						grid: {
+						table: {
 							width: 400,
 							columns: [
 								{width: 110, header: "Nodes",title:"_DATA_"},
@@ -111,11 +111,11 @@
 					},
 					{
 						htmlheader: 'Fixed Width, One Column Undefined, Default Fixed',
-						plugins: ["themes","json","grid"],
+						plugins: ["themes","json","table"],
 						core: {
 							data: data
 						},
-						grid: {
+						table: {
 							width: 400,
 							columnWidth: 150,
 							columns: [
@@ -129,11 +129,11 @@
 					},
 					{
 						htmlheader: 'Fixed Width, One Column Undefined, Default Undefined',
-						plugins: ["themes","json","grid"],
+						plugins: ["themes","json","table"],
 						core: {
 							data: data
 						},
-						grid: {
+						table: {
 							width: 400,
 							columns: [
 								{width: 110, header: "Nodes",title:"_DATA_"},
@@ -146,11 +146,11 @@
 					},
 					{
 						htmlheader: 'Undefined Width, All Columns Defined',
-						plugins: ["themes","json","grid"],
+						plugins: ["themes","json","table"],
 						core: {
 							data: data
 						},
-						grid: {
+						table: {
 							columns: [
 								{width: 150, header: "Nodes",title:"_DATA_"},
 								{width: 100, cellClass: "col1", value: "price", header: "<i>Price</i>", title:"price", valueClass:"spanclass"},
@@ -162,11 +162,11 @@
 					},
 					{
 						htmlheader: 'Undefined Width, All Columns Defined, One auto Column',
-						plugins: ["themes","json","grid"],
+						plugins: ["themes","json","table"],
 						core: {
 							data: data
 						},
-						grid: {
+						table: {
 							columns: [
 								{width: 150, header: "Nodes",title:"_DATA_"},
 								{width: 100, cellClass: "col1", value: "price", header: "<i>Price</i>", title:"price", valueClass:"spanclass"},
@@ -178,11 +178,11 @@
 					},
 					{
 						htmlheader: 'Undefined Width, All Columns Defined, Two auto Columns',
-						plugins: ["themes","json","grid"],
+						plugins: ["themes","json","table"],
 						core: {
 							data: data
 						},
-						grid: {
+						table: {
 							columns: [
 								{width: 150, header: "Nodes",title:"_DATA_"},
 								{width: "auto", cellClass: "col1", value: "price", header: "<i>Price</i>", title:"price", valueClass:"spanclass"},
@@ -194,11 +194,11 @@
 					},
 					{
 						htmlheader: 'Undefined Width, One Column Undefined, Default Fixed',
-						plugins: ["themes","json","grid"],
+						plugins: ["themes","json","table"],
 						core: {
 							data: data
 						},
-						grid: {
+						table: {
 							columnWidth: 100,
 							columns: [
 								{width: 150, header: "Nodes",title:"_DATA_"},
@@ -211,11 +211,11 @@
 					},
 					{
 						htmlheader: 'Undefined Width, One Column Undefined, Default Undefined',
-						plugins: ["themes","json","grid"],
+						plugins: ["themes","json","table"],
 						core: {
 							data: data
 						},
-						grid: {
+						table: {
 							columns: [
 								{width: 150, header: "Nodes",title:"_DATA_"},
 								{width: 123, cellClass: "col1", value: "price", header: "<i>Price</i>", title:"price", valueClass:"spanclass"},
@@ -227,11 +227,11 @@
 					},
 					{
 						htmlheader: 'Fixed Width, Columns Percentages',
-						plugins: ["themes","json","grid"],
+						plugins: ["themes","json","table"],
 						core: {
 							data: data
 						},
-						grid: {
+						table: {
 							width: 400,
 							columns: [
 								{width: '35%', header: "Nodes",title:"_DATA_"},
@@ -244,11 +244,11 @@
 					},
 					{
 						htmlheader: 'Undefined Width, Columns Percentages',
-						plugins: ["themes","json","grid"],
+						plugins: ["themes","json","table"],
 						core: {
 							data: data
 						},
-						grid: {
+						table: {
 							columns: [
 								{width: '35%', header: "Nodes",title:"_DATA_"},
 								{width: '45%', cellClass: "col1", value: "price", header: "<i>Price</i>", title:"price", valueClass:"spanclass"},
@@ -261,14 +261,14 @@
 				];
 				
 				for (i=0; i<trees.length; i++) {
-					expected = trees[i].grid.width+': '+[trees[i].grid.columns[0].width,trees[i].grid.columns[1].width,trees[i].grid.columns[2].width].join(' ');
+					expected = trees[i].table.width+': '+[trees[i].table.columns[0].width,trees[i].table.columns[1].width,trees[i].table.columns[2].width].join(' ');
 					$("div#alltrees").append('<div class="treesection"><h4>'+trees[i].htmlheader+'</h4><p>Expected '+expected+'</p><p class="actuals"></p><div id="jstree'+i+'"></div></div><hr/>');
 
-					$("div#jstree"+i).on("loaded_grid.jstree",function(){
-						var wrapper = $(this).closest("div.jstree-grid-wrapper"),
-						midw = wrapper.children("div.jstree-grid-midwrapper"),
+					$("div#jstree"+i).on("loaded_table.jstree",function(){
+						var wrapper = $(this).closest("div.jstree-table-wrapper"),
+						midw = wrapper.children("div.jstree-table-midwrapper"),
 						section = wrapper.closest("div.treesection"),
-						actuals = "Actuals "+wrapper.outerWidth()+": "+[midw.find("div.jstree-grid-column:eq(0)").outerWidth(),midw.find("div.jstree-grid-column:eq(1)").outerWidth(),midw.find("div.jstree-grid-column:eq(2)").outerWidth()].join(' ');
+						actuals = "Actuals "+wrapper.outerWidth()+": "+[midw.find("div.jstree-table-column:eq(0)").outerWidth(),midw.find("div.jstree-table-column:eq(1)").outerWidth(),midw.find("div.jstree-table-column:eq(2)").outerWidth()].join(' ');
 						
 						section.find(".actuals").text(actuals);
 					});
@@ -290,7 +290,7 @@
 	</head>
 	<body>
 
-		<h2>Tree Grid Widths Test</h2>
+		<h2>Tree table Widths Test</h2>
 
 		<div id="alltrees">
 		</div>

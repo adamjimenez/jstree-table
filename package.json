@@ -1,9 +1,9 @@
 { 
-	"name": "jstreegrid", 
-	"description": "grid plugin for jstree",
+	"name": "jstreetable", 
+	"description": "table plugin for jstree",
 	"version": "3.5.16",
-	"url": "https://github.com/deitch/jstree-grid",
-	"author": {"name":"Avi Deitcher","url":"https://github.com/deitch"},
+	"url": "https://github.com/adamjimenez/jstree-table",
+	"author": {"name":"Adam Jimenez","url":"https://github.com/adamjimenez"},
 	"contributors": [
 		{
 			"name": "jochenberger",
@@ -18,8 +18,8 @@
 			"url": "https://github.com/side-by-side"
 		},
 		{
-			"name": "Adam Jimenez",
-			"url": "https://github.com/adamjimenez"
+			"name": "Avi Deitchler",
+			"url": "https://github.com/deitch"
 		}
 	],
 	"dependencies": {
@@ -28,12 +28,12 @@
 	"keywords":[
 		"jquery",
 		"jstree",
-		"grid",
+		"table",
 		"javascript"
 	],
 	"repository": {
 		"type" : "git",
-		"url" : "http://github.com/deitch/jstree-grid.git"
+		"url" : "http://github.com/adamjimenez/jstree-table.git"
 	},
 	"license" : "MIT"
 }

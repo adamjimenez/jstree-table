@@ -1,24 +1,24 @@
 <html>
 	<head>
-		<title>jstree treegrid 3.2.0 plugin demo</title>
+		<title>jstree treetable 3.2.0 plugin demo</title>
 		<link rel="stylesheet" href="../lib/themes-3/default/style.min.css" />
 		<script type='text/javascript' src='http://code.jquery.com/jquery-2.1.0.js'></script>
 		<script type="text/javascript" src="../lib/jstree-3.3.0-patched.js"></script>
-		<script type="text/javascript" src="../jstreegrid.js"></script>
+		<script type="text/javascript" src="../jstreetable.js"></script>
 		<style type="text/css">
 			@import url('http://getbootstrap.com/dist/css/bootstrap.css');
 		</style>
 		<script type="text/javascript">
 		$(document).ready(function(){
 			$("#js1").jstree({
-			  plugins: ["grid", "dnd", "types", "checkbox", "wholerow", "contextmenu"],
+			  plugins: ["table", "dnd", "types", "checkbox", "wholerow", "contextmenu"],
 			  "checkbox": {
 			    "three_state": false,
 			    "cascade": "down",
 			    "tie_selection": false,
 			    "whole_node": false
 			  },
-			  'grid': {
+			  'table': {
 			    'columns': [{
 			      'header': 'Column 1'
 			    }, {
@@ -75,14 +75,14 @@
 			  }
 			});
 			$("#js2").jstree({
-			  plugins: ["grid", "dnd", "types", "checkbox", "wholerow", "contextmenu"],
+			  plugins: ["table", "dnd", "types", "checkbox", "wholerow", "contextmenu"],
 			  "checkbox": {
 			    //"three_state" : false,
 			    "cascade": "up",
 			    "tie_selection": false,
 			    "whole_node": false
 			  },
-			  'grid': {
+			  'table': {
 			    'columns': [{
 			      'header': 'Column 1'
 			    }, {
@@ -177,7 +177,7 @@
 	</head>
 	<body>
 
-		<h2>Tree Grid DND Test</h2>
+		<h2>Tree table DND Test</h2>
 
 			<div class="container-fluid">
 			  <div class="row">

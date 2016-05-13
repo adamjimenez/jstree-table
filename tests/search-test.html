@@ -1,12 +1,12 @@
 <html>
 	<head>
-		<title>jstree treegrid 3.2.0 plugin demo</title>
+		<title>jstree treetable 3.2.0 plugin demo</title>
 		<link rel="stylesheet" href="../lib/themes-3/default/style.min.css" />
 		<script type='text/javascript' src='http://code.jquery.com/jquery-2.1.0.js'></script>
 		<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
 		<script type="text/javascript" src="../lib/jstree-3.2.1.js"></script>
-		<script type="text/javascript" src="../jstreegrid.js"></script>
+		<script type="text/javascript" src="../jstreetable.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				var data = [{ "id" : "Root", "parent" : "#", "text" : "Root"},
@@ -19,9 +19,9 @@
 
 				$('#jstree').jstree({
 					"core" : { "data" : data },
-					"plugins" : [ "checkbox", "search", "grid" ],
+					"plugins" : [ "checkbox", "search", "table" ],
 					"search" : { "show_only_matches" : false},
-					"grid" : { columns: [
+					"table" : { columns: [
 									{width: 190, header: "name"},
 									{width: 140, header: "open", value: "open"},
 									{width: 140, header: "close", value: "close"},
@@ -45,7 +45,7 @@
 				                var v = $('#treeSearch').val();
 				                $('#jstree').jstree(true).search(v);
 
-				                //hide/show grid values for nodes affected by searching
+				                //hide/show table values for nodes affected by searching
 				                var hidden = $('ul li:hidden');
 				                var visible = $('ul li:visible');
 
