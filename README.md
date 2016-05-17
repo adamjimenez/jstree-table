@@ -1,5 +1,8 @@
 # jsTreeTable
 
+[![Build Status](https://travis-ci.org/adamjimenez/jstree-table.svg?branch=testing)](https://travis-ci.org/adamjimenez/jstree-table)
+[![File Size](https://badge-size.herokuapp.com/adamjimenez/jstree-table/master/jstreetable.js.svg?compression=gzip&label=size)](https://raw.githubusercontent.com/adamjimenez/jstree-table/master/jstreetable.js)
+
 ![jstree-table](https://cloud.githubusercontent.com/assets/573192/15243026/346e6d9e-18f1-11e6-8ed2-eb0630e6ad9b.jpg)
 
 ## Overview
