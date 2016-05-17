@@ -85,21 +85,28 @@ describe('JsTreeTable', function() {
     });
 
     it('double click separator to size', function() {
+        var width1A = $('.jstree-table-header-cell:eq(1)').width();
         $('.jstree-table-resizable-separator:eq(1)').dblclick();
-        expect($('.jstree-table-header-cell:eq(1)').width()).toBe(35);
+        var width1B = $('.jstree-table-header-cell:eq(1)').width();
+        expect(width1A>width1B).toBe(true);
     });
 
     it('autosize', function() {
         var ref = $("#jstree").jstree(true);
+        var width1A = $('.jstree-table-header-cell:eq(1)').width();
 		ref.autosize_column($('.jstree-table-column:eq(1)'));
-        expect($('.jstree-table-header-cell:eq(1)').width()).toBe(35);
+        var width1B = $('.jstree-table-header-cell:eq(1)').width(); 
+        expect(width1A>width1B).toBe(true);
     });
 
     it('autosize all', function() {
         var ref = $("#jstree").jstree(true);
+        var width1A = $('.jstree-table-header-cell:eq(1)').width();
+        var width2A = $('.jstree-table-header-cell:eq(2)').width();
 		ref.autosize_all_columns();
-        expect($('.jstree-table-header-cell:eq(1)').width()).toBe(35);
-        expect($('.jstree-table-header-cell:eq(2)').width()).toBe(15);
+        var width1B = $('.jstree-table-header-cell:eq(1)').width();
+        var width2B = $('.jstree-table-header-cell:eq(2)').width();
+        expect(width1A>width1B && width2A>width2B).toBe(true);
     });
 
     it('fixed header when scrolling', function(done) {
