@@ -556,7 +556,7 @@
 				}
 			
 				// add sort arrow
-				$(this.closest('.jstree-table-wrapper')).find(".jstree-table-sort-icon").remove();
+				$(this).closest('.jstree-table-wrapper').find(".jstree-table-sort-icon").remove();
 				$("<span></span>").addClass("jstree-table-sort-icon").appendTo($(this)).addClass(arrowClass);
 			
 				// sort by column
