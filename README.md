@@ -18,17 +18,17 @@ Plugin for the jstree www.jstree.com tree component that provides columns to the
 4. Include relevant parameters. 
 
 ````HTML
-<!-- include jstreegrid -->
+<!-- include jstreetable -->
 <script src="/path/to/jstreetable.js"></script> 
 ````
 
 
 ````JavaScript
 $("div#id").jstree({
-	// include grid as a plugin
+	// include table as a plugin
 	plugins: ["core","ui",...,"table"],
 	// include relevant parameters
-	grid: {
+	table: {
 		columns: [{},{},...,{}],
 		width: 25
 	},
@@ -48,7 +48,7 @@ $("div#id").jstree({
 * `columnWidth`: default width for a column for which no width is given. If no width is given, the default is `auto`.
 * `columns`: an array of columns to create, on order. Each entry is an object with the following parameters:
 	* `tree`: boolean, whether the jstree should be placed in this column. Only the first `true` is accepted. If no column is set to `tree:true`, then the first column is used.
-	* `width`: width of the column in pixels. If no width is given, the default is `auto` **except for the last column**. In the last column, if no width is given, it is treated as 'auto' and fills the entire rest of the grid to the right.
+	* `width`: width of the column in pixels. If no width is given, the default is `auto` **except for the last column**. In the last column, if no width is given, it is treated as 'auto' and fills the entire rest of the table to the right.
 	* `header`: string to use as a header for the column.
 	* `headerClass`: a CSS class to add to the header cell in this column
 	* `columnClass`: a CSS class to add to the header cell and the column cell
@@ -79,7 +79,7 @@ Therefore, if you have a node whose data is given by:
 and we want the price value (10) to be in column 1, then we have a config of:
 
 ````JavaScript
-grid: {
+table: {
 	columns: [
 		{width: 50, header: "Nodes"},
 		{width: 30, header: "Price", value: "price"}
@@ -90,7 +90,7 @@ grid: {
 The format option allows you to change the displayed value (10 => $10):
 
 ````JavaScript
-grid: {
+table: {
 	columns: [
 		{width: 50, header: "Nodes"},
 		{width: 30, header: "Price", value: 'price', format: function(v){return("$"+(v));}}
@@ -99,17 +99,17 @@ grid: {
 ````
 
 ### Events
-* `loaded.jstree`: When the tree is done loading, as usual, it fires a "loaded.jstree" event on the div to which you added jstree. jsTreeGrid uses this event to start its own load process. 
-* `loaded_grid.jstree`: When jsTreeGrid is done, it fires a "loaded_grid.jstree" event on the same div. If you need to run some 
-code after the jsTreeGrid is done loading, just listen for that event. An example is in the treegrid.HTML sample page.
-* `select_cell.jstree-table`: If you click in any individual cell, the jstreegrid will fire a "select_cell.jstree_grid" event on the jstree. 
-* `update_cell.jstree-table`: If you right-click a cell and edit it, when the edit is complete, and if the value has changed, the jstreegrid will fire a `update_cell.jstree-table` event on the jstree.
+* `loaded.jstree`: When the tree is done loading, as usual, it fires a "loaded.jstree" event on the div to which you added jstree. jsTreeTable uses this event to start its own load process. 
+* `loaded_table.jstree`: When jsTreeTable is done, it fires a "loaded_table.jstree" event on the same div. If you need to run some 
+code after the jsTreeTable is done loading, just listen for that event. An example is in the treetable.html sample page.
+* `select_cell.jstree-table`: If you click in any individual cell, the jstreetable will fire a "select_cell.jstree_table" event on the jstree. 
+* `update_cell.jstree-table`: If you right-click a cell and edit it, when the edit is complete, and if the value has changed, the jstreetable will fire a `update_cell.jstree-table` event on the jstree.
 * `resize_column.jstree-table`: When a column is resized, whether from dragging the resizer or double-clicking it, this event will be fired. 
 
 The signature for the select_cell.jstree-table handler is:
 
 ````JavaScript
-function(event,{value:value,header:header,node:node,grid:grid,sourceName:sourceName})
+function(event,{value:value,header:header,node:node,table:table,sourceName:sourceName})
 ````
 
 where:
@@ -117,7 +117,7 @@ where:
 * value: value of the data element that rendered this cell
 * column: header for the column
 * node: reference to the &lt;li&gt; element in the tree that starts the row with the clicked cell
-* grid: reference to the &lt;div&gt; element in the grid that was clicked
+* table: reference to the &lt;div&gt; element in the table that was clicked
 * sourceName: name of the element in the original data that contained this value, as provided by the config in the columns "value" for this column
 
 
