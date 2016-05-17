@@ -746,13 +746,6 @@
 			h2.css(fn).width(Math.min(h1.text("pW" + h2[0].value).width(),w))[0].select();
 		};
 		
-		this.table_hide_column = function (col) {
-			this.midWrapper.find(".jstree-table-column-"+col).hide();
-		};
-		this.table_show_column = function (col) {
-			this.midWrapper.find(".jstree-table-column-"+col).show();
-		};
-		
 		this.autosize_column = function (col) {
 			// don't resize hidden columns
 			if (col.is(":hidden")) { return; }
