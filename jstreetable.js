@@ -200,7 +200,7 @@
 						'.jstree-table-col-0 {width: 100%;}',
 						'.jstree-table-sort-icon {font-size: 8px; position: absolute; top:0; left: calc(50% - 4px);}',
 						'.jstree-table-midwrapper a.jstree-clicked, .jstree-table-midwrapper a.jstree-hovered{background: transparent; border-color: transparent;}',
-						'.jstree-table-midwrapper a.jstree-clicked:before, .jstree-table-midwrapper a.jstree-hovered:before {position: absolute; left: 0; content:""; width: 100%; height: inherit; z-index: -1;}',
+						'.jstree-table-midwrapper a.jstree-clicked:before, .jstree-table-midwrapper a.jstree-hovered:before {position: absolute; left: 0; content:""; height: inherit; z-index: -1;}',
 						'.jstree-table-midwrapper a.jstree-hovered:before {background: #e7f4f9;}',
 						'.jstree-table-midwrapper a.jstree-clicked:before {background: #beebff;}',
 						'.vakata-context {z-index:2;}'
@@ -318,10 +318,7 @@
 				this.element.trigger("loaded_table.jstree");
 				}, this))
 			.on("ready.jstree",$.proxy(function (e,data) {
-				// find the line-height of the first known node
-				var anchorHeight = this.element.find("li a:first").outerHeight(),
-				cls = this.element.attr("class") || "";
-				$('<style type="text/css">div.jstree-table-cell-root-'+this.rootid+' {line-height: '+anchorHeight+'px; height: '+anchorHeight+'px;}</style>').appendTo("head");
+				var cls = this.element.attr("class") || "";
 
 				// add container classes to the wrapper - EXCEPT those that are added by jstree, i.e. "jstree" and "jstree-*"
 				q = cls.split(/\s+/).map(function(i){
@@ -329,7 +326,29 @@
 				  return (match ? "" : i);
 				});
 				this.tableWrapper.addClass(q.join(" "));
-								
+				
+				var me = this;
+				function resize() {
+					// find the line-height of the first known node
+					var anchorHeight = me.element.find(".jstree-leaf").outerHeight();
+					
+					// resize the hover/ focus highlight
+					var tableWidth = $('.jstree-table-midwrapper').width();
+					
+					$('#jsTreeTableExtraCss').remove();
+					$('<style type="text/css" id="jsTreeTableExtraCss">\
+						div.jstree-table-cell-root-'+me.rootid+' {line-height: '+anchorHeight+'px; min-height: '+anchorHeight+'px;}\
+						div.jstree-table-midwrapper a.jstree-clicked:before, .jstree-table-midwrapper a.jstree-hovered:before {width: ' + tableWidth + 'px;}\
+					</style>').appendTo("head");
+				}
+				
+				resize();
+				
+				// resize rows on zoom
+				$(window).on('resize', resize);
+				
+				// resize column expand
+				this.element.on("resize_column.jstree-table", resize);
 			},this))
 			.on("move_node.jstree",$.proxy(function(e,data){
 				var node = data.new_instance.element;
