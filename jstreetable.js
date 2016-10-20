@@ -327,7 +327,7 @@
 				q = cls.split(/\s+/).map(function(i){
 				  var match = i.match(/^jstree(-|$)/);
 				  return (match ? "" : i);
-				})
+				});
 				this.tableWrapper.addClass(q.join(" "));
 								
 			},this))
@@ -534,7 +534,7 @@
 				.on("click", ".jstree-table-separator", function (e) {
 					// don't sort after resize
 					e.stopPropagation();
-				})
+				});
 			}
 			
 			this.tableWrapper.on("click", ".jstree-table-header-cell", function (e) {
