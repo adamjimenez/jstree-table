@@ -184,7 +184,7 @@
 				if (!styled) {
 					styled = true;
 					styles = [
-						'.jstree-table-cell {vertical-align: top; overflow:hidden;margin-left:0;width: 100%;padding-left:7px;white-space: nowrap; cursor: default;}',
+						'.jstree-table-cell {vertical-align: top; overflow:hidden;margin-left:0;width: 100%;padding-left:7px;white-space: nowrap; cursor: default; text-overflow: ellipsis;}',
 						'.jstree-table-cell span {margin-right:0px;margin-right:0px;*display:inline;*+display:inline;white-space: nowrap;}',
 						'.jstree-table-separator {position:absolute; top:0; right:0; height:24px; margin-left: -2px; border-width: 0 2px 0 0; *display:inline; *+display:inline; margin-right:0px;width:0px;}',
 						'.jstree-table-header-cell {overflow: hidden; white-space: nowrap;padding: 4px 3px 2px 5px; cursor: default;}',
@@ -197,7 +197,7 @@
 						'.jstree-table-midwrapper {display: table-row;}',
 						'.jstree-table-width-auto {width:auto;display:block;}',
 						'.jstree-table-column {display: table-cell; overflow: hidden;}',
-						'.jstree-table-col-0 {width: 100%;}',
+						'.jstree-table-col-0 {width: calc(100% - 18px); overflow: hidden; text-overflow: ellipsis;}',
 						'.jstree-table-sort-icon {font-size: 8px; position: absolute; top:0; left: calc(50% - 4px);}',
 						'.jstree-table-midwrapper a.jstree-clicked, .jstree-table-midwrapper a.jstree-hovered{background: transparent; border-color: transparent;}',
 						'.jstree-table-midwrapper a.jstree-clicked:before, .jstree-table-midwrapper a.jstree-hovered:before {position: absolute; left: 0; content:""; height: inherit; z-index: -1;}',
