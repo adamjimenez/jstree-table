@@ -321,7 +321,7 @@
 				var cls = this.element.attr("class") || "";
 
 				// add container classes to the wrapper - EXCEPT those that are added by jstree, i.e. "jstree" and "jstree-*"
-				q = cls.split(/\s+/).map(function(i){
+				q = cls.split(/\s+/).map(function(i) {
 				  var match = i.match(/^jstree(-|$)/);
 				  return (match ? "" : i);
 				});
@@ -350,14 +350,13 @@
 				// resize column expand
 				this.element.on("resize_column.jstree-table", resize);
 			},this))
-			.on("move_node.jstree",$.proxy(function(e,data){
+			.on("move_node.jstree",$.proxy(function(e,data) {
 				var node = data.new_instance.element;
 				//renderAWidth(node,this);
 				// check all the children, because we could drag a tree over
-				node.find("li > a").each($.proxy(function(i,elm){
+				node.find("li > a").each($.proxy(function(i,elm) {
 					//renderAWidth($(elm),this);
 				},this));
-				
 			},this))
 			.on("search.jstree", $.proxy(function (e, data) {
 				// search sometimes filters, so we need to hide all of the appropriate table cells as well, and show only the matches
@@ -387,27 +386,26 @@
 				copyData(oldtree,data.original,newtree,data.node,true);
 				newtree._prepare_table(obj);
 				return true;
-			})
-			;
+			});
 			if (this._tableSettings.isThemeroller) {
 				this.element
-					.on("select_node.jstree",$.proxy(function(e,data){
+					.on("select_node.jstree",$.proxy(function(e,data) {
 						data.rslt.obj.children("a").nextAll("div").addClass("ui-state-active");
 					},this))
-					.on("deselect_node.jstree deselect_all.jstree",$.proxy(function(e,data){
+					.on("deselect_node.jstree deselect_all.jstree",$.proxy(function(e,data) {
 						data.rslt.obj.children("a").nextAll("div").removeClass("ui-state-active");
 					},this))
-					.on("hover_node.jstree",$.proxy(function(e,data){
+					.on("hover_node.jstree",$.proxy(function(e,data) {
 						data.rslt.obj.children("a").nextAll("div").addClass("ui-state-hover");
 					},this))
-					.on("dehover_node.jstree",$.proxy(function(e,data){
+					.on("dehover_node.jstree",$.proxy(function(e,data) {
 						data.rslt.obj.children("a").nextAll("div").removeClass("ui-state-hover");
 					},this));
 			}
 			
 			if (this._tableSettings.stateful) {
 				this.element
-					.on("resize_column.jstree-table",$.proxy(function(e,col,width){
+					.on("resize_column.jstree-table",$.proxy(function(e,col,width) {
 						localStorage['jstree-root-'+this.rootid+'-column-'+col] = width;
 					},this));
 			}
@@ -509,37 +507,40 @@
 						currentTree.trigger("resize_column.jstree-table", [colNum,width]);
 					}
 				}).mousemove(function (e) {
-						if (isClickedSep) {
-							newMouseX = e.pageX;
-							var diff = newMouseX - oldMouseX,
-							oldPrevHeaderInner, 
-							oldPrevColWidth, newPrevColWidth;
+					if (isClickedSep) {
+						newMouseX = e.pageX;
+						var diff = newMouseX - oldMouseX,
+						oldPrevHeaderInner, 
+						oldPrevColWidth, newPrevColWidth;
 
-							if (diff !== 0){
-								oldPrevHeaderInner = toResize.width();
-								oldPrevColWidth = parseFloat(toResize.css("width"));
-								
-								// handle a Chrome issue with columns set to auto
-								// thanks to Brabus https://github.com/side-by-side
-								if (!oldPrevColWidth) {oldPrevColWidth = toResize.innerWidth();}
-								
-								// make sure that diff cannot be beyond the left/right limits
-								diff = diff < 0 ? Math.max(diff,-oldPrevHeaderInner) : diff;
-								newPrevColWidth = oldPrevColWidth+diff;
-								
-								// only do this if we are not shrinking past 0 on left - and limit it to that amount
-								if ((diff > 0 || oldPrevHeaderInner > 0) && newPrevColWidth > MINCOLWIDTH) {
-									toResize.width(newPrevColWidth+"px");
-									toResize.css("min-width",newPrevColWidth+"px");
-									toResize.css("max-width",newPrevColWidth+"px");
-									oldMouseX = newMouseX;
-								}
+						if (diff !== 0) {
+							oldPrevHeaderInner = toResize.width();
+							oldPrevColWidth = parseFloat(toResize.css("width"));
+							
+							// handle a Chrome issue with columns set to auto
+							// thanks to Brabus https://github.com/side-by-side
+							if (!oldPrevColWidth) {
+								oldPrevColWidth = toResize.innerWidth();
+							}
+							
+							// make sure that diff cannot be beyond the left/right limits
+							diff = diff < 0 ? Math.max(diff,-oldPrevHeaderInner) : diff;
+							newPrevColWidth = oldPrevColWidth+diff;
+							
+							// only do this if we are not shrinking past 0 on left - and limit it to that amount
+							if ((diff > 0 || oldPrevHeaderInner > 0) && newPrevColWidth > MINCOLWIDTH) {
+								toResize.width(newPrevColWidth+"px");
+								toResize.css("min-width",newPrevColWidth+"px");
+								toResize.css("max-width",newPrevColWidth+"px");
+								oldMouseX = newMouseX;
 							}
 						}
-					});
+					}
+				});
 				this.tableWrapper.on("selectstart", ".jstree-table-resizable-separator", function () { 
 					return false; 
-				}).on("mousedown", ".jstree-table-resizable-separator", function (e) {
+				})
+				.on("mousedown", ".jstree-table-resizable-separator", function (e) {
 					isClickedSep = true;
 					oldMouseX = e.pageX;
 					toResize = $(this).closest("div.jstree-table-column");
@@ -560,7 +561,7 @@
 				if (!_this.sort) { return; }
 			
 				// get column
-				var name = $(this).attr(COL_DATA_ATTR);					
+				var name = $(this).attr(COL_DATA_ATTR);
 				if (!name) { return; }
 			
 				// sort order
@@ -590,7 +591,7 @@
 					e.preventDefault();
 					
 					var options = {
-						"fit":{label:"Size column to fit","action": function (data) {								
+						"fit":{label:"Size column to fit","action": function (data) {
 							var col = $(e.target).closest("div.jstree-table-column");
 							_this.autosize_column(col);
 						}},
@@ -771,7 +772,7 @@
 			
 			var oldPrevColWidth = parseFloat(col.css("width")), newWidth = 0, diff,
 			colNum = col.prevAll(".jstree-table-column").length,
-			oldPrevHeaderInner = col.width(), newPrevColWidth;			
+			oldPrevHeaderInner = col.width(), newPrevColWidth;
 	
 			//find largest width
 			col.find(".jstree-table-cell").each(function() {
@@ -880,7 +881,6 @@
 					// add a column class to the dataCell
 					dataCell.addClass(ccl);
 
-
 					// get the contents of the cell
 					val = "";
 					if (objData.data && objData.data[col.value] !== undefined) {
@@ -965,7 +965,6 @@
 					tableCellChild = findDataCell(dataCell,tableCellChildId);
 					tableCellParent = findDataCell(dataCell,tableCellParentId);
 
-
 					// if our parent is already drawn, then we put this in the right order under our parent
 					if (tableCellParentId) {
 						if (tableCellParent && tableCellParent.length > 0) {
@@ -1014,19 +1013,16 @@
 					if (title) {
 						span.attr("title",title);
 					}
-
-				}		
+				}
 				last.addClass("jstree-table-cell-last"+(tr?" ui-state-default":""));
 				// if there is no width given for the last column, do it via automatic
 				if (cols[cols.length-1].width === undefined) {
 					last.addClass("jstree-table-width-auto").next(".jstree-table-separator").remove();
 				}
 			}
-			this.element.css({'overflow-y':'auto !important'});			
+			this.element.css({'overflow-y':'auto !important'});
 		};
 		// clean up holding cells
 		this.holdingCells = {};
-
-		// need to do alternating background colors or borders
 	};
 }));
