@@ -330,8 +330,8 @@
 				var me = this;
 				function resize() {
 					// find the line-height of the first known node
-					var anchorHeight = me.element.find(".jstree-leaf").outerHeight();
-					
+					var anchorHeight = me.element.find(".jstree-node").outerHeight();
+
 					// resize the hover/ focus highlight
 					var tableWidth = $('.jstree-table-midwrapper').width();
 					
