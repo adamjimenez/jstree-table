@@ -150,7 +150,7 @@
 					indent: 0,
 					sort: s.sort || false,
 					sortOrder: s.sortOrder || 'text',
-					sortAsc: s.sortAsc || true,
+					sortAsc: s.sortAsc !== false,
 					fixedHeader: s.fixedHeader !== false,
 					headerContextMenu: s.headerContextMenu !== false,
 					checkIcon: 'fa fa-check',
