@@ -148,8 +148,9 @@
 					draggable : s.draggable,
 					stateful: s.stateful,
 					indent: 0,
-					sortOrder: 'text',
-					sortAsc: true,
+					sort: s.sort || false,
+					sortOrder: s.sortOrder || 'text',
+					sortAsc: s.sortAsc !== false,
 					fixedHeader: s.fixedHeader !== false,
 					headerContextMenu: s.headerContextMenu !== false,
 					checkIcon: 'fa fa-check',
@@ -246,9 +247,13 @@
 					if (gs.sortOrder==='text') {
 						bigger = (defaultSort(a, b) === 1);
 					} else {
-						var nodeA = this.get_node(a);
-						var nodeB = this.get_node(b);
-						bigger = nodeA.data[gs.sortOrder] > nodeB.data[gs.sortOrder];
+						if(gs.sort) {
+							bigger = gs.sort.call(this, a, b, gs.sortOrder);
+						} else {
+							var nodeA = this.get_node(a);
+							var nodeB = this.get_node(b);
+							bigger = nodeA.data[gs.sortOrder] > nodeB.data[gs.sortOrder];
+						}
 					}
 
 					if (gs.sortAsc===false)
