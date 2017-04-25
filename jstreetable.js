@@ -262,7 +262,7 @@
 								bigger = (valueA > valueB ? 1 : -1);
 							}
 						}else{
-							// No value is first
+							// undefined is second
 							if(valueA){
 								bigger = 1;
 							}else if(valueB){

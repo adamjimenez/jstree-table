@@ -60,6 +60,7 @@ $("div#id").jstree({
 	* `valueClassPrefix`: a prefix to add to the valueClass to use as a class on this cell
 	* `wideValueClass`: the attribute on the node to use as a class on this cell - added to the <div>
 	* `wideValueClassPrefix`: a prefix to add to the wideValueClass to use as a class on this cell
+	* `sort`: a function to sort the column when the header is clicked - does not replace the default sorting function used for the first column
 * `resizable`: true/false if the columns should be resizable. Defaults to false.
 * `draggable`: true/false if the columns should be draggable (requires jQuery UI with sortable plugin). Defaults to false.
 * `stateful`: true/false. If true, then whenever a column width is resized, it will store it in html5 localStorage, if available. Defaults to false.
