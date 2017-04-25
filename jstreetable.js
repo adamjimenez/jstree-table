@@ -148,6 +148,7 @@
 					draggable : s.draggable,
 					stateful: s.stateful,
 					indent: 0,
+					sortFn: [],
 					sortOrder: 'text',
 					sortAsc: true,
 					fixedHeader: s.fixedHeader !== false,
@@ -160,6 +161,10 @@
 				}, cols = gs.columns, treecol = 0;
 				// find which column our tree shuld go in
 				for (i=0;i<s.columns.length;i++) {
+					//Save sort function
+					if (i!==0 && s.columns[i].sort) {
+						gs.sortFn[s.columns[i].value] = s.columns[i].sort;
+					}
 					if (s.columns[i].tree) {
 						// save which column it was
 						treecol = i;
@@ -244,17 +249,37 @@
 					var bigger;
 
 					if (gs.sortOrder==='text') {
-						bigger = (defaultSort(a, b) === 1);
+						bigger = defaultSort(a, b);
 					} else {
-						var nodeA = this.get_node(a);
-						var nodeB = this.get_node(b);
-						bigger = nodeA.data[gs.sortOrder] > nodeB.data[gs.sortOrder];
+						var valueA = this.get_node(a).data[gs.sortOrder];
+						var valueB = this.get_node(b).data[gs.sortOrder];
+
+						if(valueA && valueB){
+							if(gs.sortFn[gs.sortOrder]){
+								bigger = gs.sortFn[gs.sortOrder](valueA, valueB);
+							}else{
+								// Default sorting
+								bigger = (valueA > valueB ? 1 : -1);
+							}
+						}else{
+							// No value is first
+							if(valueA){
+								bigger = 1;
+							}else if(valueB){
+								bigger = -1;
+							}else{
+								// Compare two nodes without values
+								bigger = defaultSort(a, b);
+							}
+						}
 					}
 
-					if (gs.sortAsc===false)
-						bigger = !bigger;
+					if (gs.sortAsc===false){
+						bigger = -bigger;
 
-					return bigger ? 1 : -1;
+					}
+					
+					return bigger;
 				};
 				
 				// sortable columns when jQuery UI is available
