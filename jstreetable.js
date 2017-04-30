@@ -251,12 +251,13 @@
 					if (gs.sortOrder==='text') {
 						bigger = defaultSort(a, b);
 					} else {
-						var valueA = this.get_node(a).data[gs.sortOrder];
-						var valueB = this.get_node(b).data[gs.sortOrder];
-
+						var nodeA = this.get_node(a);
+						var nodeB = this.get_node(b);
+						var valueA = nodeA.data[gs.sortOrder];
+						var valueB = nodeB.data[gs.sortOrder];
 						if(valueA && valueB){
 							if(gs.sortFn[gs.sortOrder]){
-								bigger = gs.sortFn[gs.sortOrder](valueA, valueB);
+								bigger = gs.sortFn[gs.sortOrder](valueA, valueB, nodeA, nodeB);
 							}else{
 								// Default sorting
 								bigger = (valueA > valueB ? 1 : -1);
