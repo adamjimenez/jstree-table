@@ -31,7 +31,7 @@
 	SPECIAL_TITLE = "_DATA_", LEVELINDENT = 24, styled = false, TABLECELLID_PREFIX = "jstable_",TABLECELLID_POSTFIX = "_col",
 		MINCOLWIDTH = 10,
 		findDataCell = function (from,id) {
-			return from.find("div["+NODE_DATA_ATTR+'="'+id+'"]');
+			return from.find("div["+NODE_DATA_ATTR+'="'+ escapeId(id) +'"]');
 		},
 		isClickedSep = false, toResize = null, oldMouseX = 0, newMouseX = 0;
 	
@@ -148,6 +148,7 @@
 					draggable : s.draggable,
 					stateful: s.stateful,
 					indent: 0,
+					sortFn: [],
 					sortOrder: 'text',
 					sortAsc: true,
 					fixedHeader: s.fixedHeader !== false,
@@ -160,6 +161,10 @@
 				}, cols = gs.columns, treecol = 0;
 				// find which column our tree shuld go in
 				for (i=0;i<s.columns.length;i++) {
+					//Save sort function
+					if (i!==0 && s.columns[i].sort) {
+						gs.sortFn[s.columns[i].value] = s.columns[i].sort;
+					}
 					if (s.columns[i].tree) {
 						// save which column it was
 						treecol = i;
@@ -244,17 +249,38 @@
 					var bigger;
 
 					if (gs.sortOrder==='text') {
-						bigger = (defaultSort(a, b) === 1);
+						bigger = defaultSort(a, b);
 					} else {
 						var nodeA = this.get_node(a);
 						var nodeB = this.get_node(b);
-						bigger = nodeA.data[gs.sortOrder] > nodeB.data[gs.sortOrder];
+						var valueA = nodeA.data[gs.sortOrder];
+						var valueB = nodeB.data[gs.sortOrder];
+						if(valueA && valueB){
+							if(gs.sortFn[gs.sortOrder]){
+								bigger = gs.sortFn[gs.sortOrder](valueA, valueB, nodeA, nodeB);
+							}else{
+								// Default sorting
+								bigger = (valueA > valueB ? 1 : -1);
+							}
+						}else{
+							// undefined is second
+							if(valueA){
+								bigger = 1;
+							}else if(valueB){
+								bigger = -1;
+							}else{
+								// Compare two nodes without values
+								bigger = defaultSort(a, b);
+							}
+						}
 					}
 
-					if (gs.sortAsc===false)
-						bigger = !bigger;
+					if (gs.sortAsc===false){
+						bigger = -bigger;
 
-					return bigger ? 1 : -1;
+					}
+					
+					return bigger;
 				};
 				
 				// sortable columns when jQuery UI is available
