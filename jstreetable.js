@@ -192,7 +192,7 @@
 						'.jstree-table-cell {vertical-align: top; overflow:hidden;margin-left:0;width: 100%;padding-left:7px;white-space: nowrap; cursor: default; text-overflow: ellipsis;}',
 						'.jstree-table-cell span {margin-right:0px;margin-right:0px;*display:inline;*+display:inline;white-space: nowrap;}',
 						'.jstree-table-separator {position:absolute; top:0; right:0; height:24px; margin-left: -2px; border-width: 0 2px 0 0; *display:inline; *+display:inline; margin-right:0px;width:0px;}',
-						'.jstree-table-header-cell {display: inline-block; overflow: hidden; white-space: nowrap;padding: 4px 3px 2px 5px; cursor: default;}',
+						'.jstree-table-header-cell {display: table-cell; overflow: hidden; white-space: nowrap;padding: 4px 3px 2px 5px; cursor: default;}',
 						'.jstree-table-header-themeroller {border: 0; padding: 1px 3px;}',
 						'.jstree-table-header-regular {position:relative; background-color: #CBF3FD; z-index: 1;}',
 						'.jstree-table-resizable-separator {cursor: col-resize; width: 10px;}',
@@ -294,9 +294,11 @@
 							//handle: ".jstree-table-header-cell",
 							cancel: ".jstree-table-separator",
 							start: function (event, ui) {
+								ui.item.parent().children().css('display', 'inline-block');
 								from = ui.item.index();
 							},
 							stop: function (event, ui) {
+								ui.item.parent().children().css('display', 'table-cell');
 								to = ui.item.index();
 
 								if (to===from) return;
