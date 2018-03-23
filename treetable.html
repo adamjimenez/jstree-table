@@ -26,7 +26,7 @@
 				    children: [{
 				        id: "Fruit",
 				        text: "Fruit",
-				        data: {}, 
+				        data: {},
 				        children:[
 				            {id: "Apple", text: "Apple", data: {price: 0.1, quantity: 20}},
 				            {id: "Banana", text: "Banana", data: {price: 0.2, quantity: 31}},
@@ -40,7 +40,7 @@
 				    }, {
 				        id: "Vegetables",
 				        text: "Vegetables",
-				        data: {}, 
+				        data: {},
 				        children:[
 				            {id: "Aubergine", text: "Aubergine", data: {price: 0.5, quantity: 8}},
 				            {id: "Broccoli", text: "Broccoli", data: {price: 0.4, quantity: 22}},
@@ -51,7 +51,7 @@
 				    }],
 				    'state': {'opened': true}
 				}];
-				
+
 				// load jstree
 				$("div#jstree").jstree({
 					plugins: ["table","dnd","contextmenu","sort"],
@@ -70,7 +70,7 @@
 						draggable: true,
 						contextmenu: true,
 						width: 500,
-						height: 300
+						height: 200
 					}
 				});
 			});
@@ -80,7 +80,7 @@
 		<h2>JsTree Table Demo</h2>
 		This page gives a demo for using the excellent <a href="http://www.jstree.com">jstree</a> with a table.
 		The table is implemented as a standard jstree plugin.
-		Include jquery and jstree, and the plugin library jstreetable.js, and include it as a plugin. 
+		Include jquery and jstree, and the plugin library jstreetable.js, and include it as a plugin.
 		Look at the source to this page to see how it is done.
 		<p>
 			This example demonstrates advanced features including:
@@ -96,6 +96,6 @@
 		</ul>
 		<div id="jstree1">
 			<div id="jstree"></div>
-		</div>		
+		</div>
 	</body>
 </html>
