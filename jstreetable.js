@@ -840,7 +840,7 @@
 				item.css("position", "absolute");
 				item.css("width", "auto");
 				width = item.outerWidth();
-				item.css("position", "relative");
+				item.css("position", "static");
 
 				if (width>newWidth) {
 					newWidth = width;
