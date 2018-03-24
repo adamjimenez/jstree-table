@@ -894,9 +894,11 @@
 			classAdd = (tr?"themeroller":"regular"), img, objData = this.get_node(obj),
 			defaultWidth = gs.columnWidth, conf = gs.defaultConf, cellClickHandler = function (tree,node,val,col,t) {
 				return function(e) {
-					//node = tree.find("#"+node.attr("id"));
-					node.children(".jstree-anchor").trigger("click.jstree",e);
-					tree.trigger("select_cell.jstree-table", [{value: val,column: col.header,node: node,table:$(this),sourceName: col.value}]);
+					node.children(".jstree-anchor").trigger("click",e);
+				};
+			}, cellDblClickHandler = function (tree,node,val,col,t) {
+				return function(e) {
+					node.children(".jstree-anchor").trigger("dblclick",e);
 				};
 			}, cellRightClickHandler = function (tree,node,val,col,t) {
 				return function (e) {
@@ -1089,6 +1091,7 @@
 					last = last.css(conf).addClass("jstree-table-cell jstree-table-cell-regular jstree-table-cell-root-"+rootid+" jstree-table-cell-"+classAdd+" "+wcl+ " " + wideValClass + (tr?" ui-state-default":"")).addClass("jstree-table-col-"+i);
 					// add click handler for clicking inside a table cell
 					last.click(cellClickHandler(tree,t,val,col,this));
+					last.dblclick(cellDblClickHandler(tree,t,val,col,this));
 					last.on("contextmenu",cellRightClickHandler(tree,t,val,col,this));
 					last.hover(hoverInHandler(t, this), hoverOutHandler(t, this));
 
