@@ -4,6 +4,7 @@
 	"version": "1.0.0",
 	"url": "https://github.com/adamjimenez/jstree-table",
 	"author": {"name":"Adam Jimenez","url":"https://github.com/adamjimenez"},
+	"main": "jstreetable.js",
 	"dependencies": {
     	"jstree":">=3.0.0"
 	},
