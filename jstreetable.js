@@ -24,7 +24,7 @@
 		factory(jQuery);
 	}
 }(function ($) {
-	var renderAWidth, renderATitle, getIndent, copyData, htmlstripre, findLastClosedNode, BLANKRE = /^\s*$/g,
+	var renderATitle, getIndent, copyData, htmlstripre, findLastClosedNode, BLANKRE = /^\s*$/g,
 		IDREGEX = /[\\:&!^|()\[\]<>@*'+~#";,= \/${}%]/g, escapeId = function (id) {
 			return (id||"").replace(IDREGEX,'\\$&');
 		}, NODE_DATA_ATTR = "data-jstreetable", COL_DATA_ATTR = "data-jstreetable-column",
@@ -199,10 +199,10 @@
 						'.jstree-table-separator-regular {border-color: #d0d0d0; border-style: solid;}',
 						'.jstree-table-cell-themeroller {border: none !important; background: transparent !important;}',
 						'.jstree-table-wrapper {table-layout: fixed; width: 100%; overflow: auto; position: relative;}',
-						'.jstree-table-headerwrapper {position: sticky; top: 0; z-index: 1}',
+						'.jstree-table-headerwrapper {display: table-row; position: sticky; top: 0; z-index: 1}',
 						'.jstree-table-midwrapper {display: table-row;}',
 						'.jstree-table-width-auto {width:auto;display:block;}',
-						'.jstree-table-column {display: table-cell; overflow: hidden;}',
+						'.jstree-table-column {display: table-cell; vertical-align: top; overflow: hidden;}',
 						'.jstree-table-col-0 {width: calc(100% - 18px); overflow: hidden; text-overflow: ellipsis;}',
 						'.jstree-table-sort-icon {font-size: 8px; position: absolute; top:0; left: calc(50% - 4px);}',
 						'.jstree-table-midwrapper a.jstree-clicked, .jstree-table-midwrapper a.jstree-hovered{background: transparent; border-color: transparent;}',
@@ -1098,8 +1098,6 @@
 					if (title) {
 						span.attr("title",title);
 					}
-
-					last.disableSelection();
 				}
 				last.addClass("jstree-table-cell-last"+(tr?" ui-state-default":""));
 				// if there is no width given for the last column, do it via automatic
