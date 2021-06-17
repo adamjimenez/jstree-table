@@ -369,13 +369,7 @@
 				var me = this;
 				function resize() {
 					// find the line-height of the first known node
-					var anchorHeight = me.element.find(".jstree-leaf").outerHeight();
-
-					if(anchorHeight === null) {
-						var result = parent.create_node.call(me, '#',  { "id" : "tmp", "text" : "tmp" });
-						anchorHeight = me.element.find(".jstree-leaf").outerHeight() || 24;
-						parent.delete_node.call(me, "tmp");
-					}
+					var anchorHeight = me.element.find(".jstree-leaf").outerHeight() || 24;
 
 					// resize the hover/ focus highlight
 					var tableWidth = $('.jstree-table-midwrapper').width();
