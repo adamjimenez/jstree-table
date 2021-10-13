@@ -849,7 +849,7 @@
 				var item = $(this), width;
 				item.css("position", "absolute");
 				item.css("width", "auto");
-				width = item.outerWidth();
+				width = item.outerWidth() + 1;
 				item.css("position", "static");
 
 				if (width>newWidth) {
