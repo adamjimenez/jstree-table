@@ -383,9 +383,6 @@
 
 				resize();
 
-				// resize column headers
-				this.autosize_all_columns();
-
 				// resize rows on zoom
 				$(window).on('resize', resize);
 
@@ -511,6 +508,16 @@
 					width = localStorage['jstree-root-'+rootid+'-column-'+i];
 				else
 					width = cols[i].width || defaultWidth;
+				
+				var width_str =  "auto";
+				if (width !== undefined) {
+					width_str = width+"px";
+				}
+				var col = $('.jstree-table-midwrapper>div').eq(i);
+
+				col.width(width_str);
+				col.css("min-width",width_str);
+				col.css("max-width",width_str);
 
 				col = this.headerWrapper;
 				last = $("<div></div>").css(conf).addClass("jstree-table-div-"+this.uniq+"-"+i+" "+(tr?"ui-widget-header ":"")+" jstree-table-header jstree-table-header-cell jstree-table-header-"+classAdd+" "+cl+" "+ccl).html(val);
@@ -530,12 +537,6 @@
 			}
 
 			last.addClass((tr?"ui-widget-header ":"")+"jstree-table-header jstree-table-header-last jstree-table-header-"+classAdd);
-			// if there is no width given for the last column, do it via automatic
-			if (cols[cols.length-1].width === undefined) {
-				totalWidth -= width;
-				col.css({width:"auto"});
-				last.addClass("jstree-table-width-auto").next(".jstree-table-separator").remove();
-			}
 			if (hasHeaders) {
 				// save the offset of the div from the body
 				//gs.divOffset = header.parent().offset().left;
